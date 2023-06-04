@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Alert } from '../lib/alert';
 import { AuthCredentials } from '../types/auth';
+import { firebase } from '@firebase/app';
 
 @Injectable({
     providedIn: 'root',
@@ -32,7 +33,6 @@ export class AuthService {
         return this.firebaseAuth
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
-                console.log(res);
                 const { uid, email } = res.user!;
                 localStorage.setItem('user', JSON.stringify({ uid, email }));
                 this.router.navigate(['/profile']);
@@ -41,6 +41,16 @@ export class AuthService {
                 if (err.message) {
                     Alert.error(err.message);
                 }
+            });
+    }
+
+    async loginByGoogle() {
+        this.firebaseAuth
+            .signInWithPopup(new (firebase as any).auth.GoogleAuthProvider())
+            .then((res) => {
+                const { uid, email } = res.user!;
+                localStorage.setItem('user', JSON.stringify({ uid, email }));
+                this.router.navigate(['/profile']);
             });
     }
 
