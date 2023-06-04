@@ -3,9 +3,7 @@
     <div class="container">
         <div class="auth-box login-box">
             <!-- Start row -->
-            <div
-                class="row no-gutters align-items-center justify-content-center"
-            >
+            <div class="row no-gutters align-items-center justify-content-center">
                 <!-- Start col -->
                 <div class="col-md-6 col-lg-5">
                     <!-- Start Auth Box -->
@@ -14,12 +12,7 @@
                             <div class="card-body">
                                 <form (ngSubmit)="handleSubmit()">
                                     <div class="form-head">
-                                        <a class="logo"
-                                            ><img
-                                                src="assets/images/logo.png"
-                                                class="img-fluid"
-                                                alt="logo"
-                                        /></a>
+                                        <a class="logo"><img src="assets/images/logo.png" class="img-fluid" alt="logo" /></a>
                                     </div>
                                     <h4 class="text-primary my-4">Log in !</h4>
                                     <div class="form-group">
@@ -40,9 +33,7 @@
                                             type="password"
                                             (keyup)="handleChange()"
                                             class="form-control"
-                                            [(ngModel)]="
-                                                authCredentials.password
-                                            "
+                                            [(ngModel)]="authCredentials.password"
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
@@ -52,37 +43,18 @@
                                     </div>
                                     <div class="form-row mb-3">
                                         <div class="col-sm-6">
-                                            <div
-                                                class="custom-control custom-checkbox text-left"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="custom-control-input"
-                                                    id="rememberme"
-                                                />
-                                                <label
-                                                    class="custom-control-label font-14"
-                                                    for="rememberme"
-                                                    >Remember Me</label
-                                                >
+                                            <div class="custom-control custom-checkbox text-left">
+                                                <input type="checkbox" class="custom-control-input" id="rememberme" />
+                                                <label class="custom-control-label font-14" for="rememberme">Remember Me</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="forgot-psw">
-                                                <a
-                                                    id="forgot-psw"
-                                                    href="user-forgotpsw.html"
-                                                    class="font-14"
-                                                    >Forgot Password?</a
-                                                >
+                                                <a id="forgot-psw" href="user-forgotpsw.html" class="font-14">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <button
-                                        type="submit"
-                                        [disabled]="disbaledSbtmBtn"
-                                        class="btn btn-success btn-lg btn-block font-18"
-                                    >
+                                    <button type="submit" [disabled]="disbaledSbtmBtn" class="btn btn-success btn-lg btn-block font-18">
                                         Log in
                                     </button>
                                 </form>
@@ -90,13 +62,8 @@
                                     <h6 class="text-muted">OR</h6>
                                 </div>
                                 <div class="social-login text-center">
-                                    <button
-                                        (click)="auth.loginByGoogle()"
-                                        type="submit"
-                                        class="btn btn-danger-rgba font-18 w-100"
-                                    >
-                                        <i class="mdi mdi-google mr-2"></i
-                                        >Google
+                                    <button (click)="auth.loginByGoogle()" type="submit" class="btn btn-danger-rgba font-18 w-100">
+                                        <i class="mdi mdi-google mr-2"></i>Google
                                     </button>
                                 </div>
                                 <p class="mb-0 mt-3">
