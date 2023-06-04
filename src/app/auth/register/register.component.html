@@ -3,9 +3,7 @@
     <div class="container">
         <div class="auth-box register-box">
             <!-- Start row -->
-            <div
-                class="row no-gutters align-items-center justify-content-center"
-            >
+            <div class="row no-gutters align-items-center justify-content-center">
                 <!-- Start col -->
                 <div class="col-md-6 col-lg-5">
                     <!-- Start Auth Box -->
@@ -14,12 +12,7 @@
                             <div class="card-body">
                                 <form (ngSubmit)="handleSubmit()">
                                     <div class="form-head">
-                                        <a class="logo"
-                                            ><img
-                                                src="assets/images/logo.png"
-                                                class="img-fluid"
-                                                alt="logo"
-                                        /></a>
+                                        <a class="logo"><img src="assets/images/logo.png" class="img-fluid" alt="logo" /></a>
                                     </div>
                                     <h4 class="text-primary my-4">Sign Up !</h4>
                                     <div class="form-group">
@@ -40,9 +33,7 @@
                                         <input
                                             type="password"
                                             (keyup)="handleChange()"
-                                            [(ngModel)]="
-                                                authCredentials.password
-                                            "
+                                            [(ngModel)]="authCredentials.password"
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
@@ -56,9 +47,7 @@
                                         <input
                                             type="password"
                                             (keyup)="handleChange()"
-                                            [(ngModel)]="
-                                                authCredentials.confirmPassword
-                                            "
+                                            [(ngModel)]="authCredentials.confirmPassword"
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
@@ -68,11 +57,7 @@
                                             required
                                         />
                                     </div>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-success btn-lg btn-block font-18"
-                                        [disabled]="disbaledSbtmBtn"
-                                    >
+                                    <button type="submit" class="btn btn-success btn-lg btn-block font-18" [disabled]="disbaledSbtmBtn">
                                         Register
                                     </button>
                                 </form>
