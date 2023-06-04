@@ -3,8 +3,8 @@
     : Custom - Sinlge Product js :
 ---------------------------------------
 */
-"use strict";
-$(document).ready(function() {
+'use strict';
+$(document).ready(function () {
     $('.product-box-for').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -29,17 +29,17 @@ $(document).ready(function() {
         autoplaySpeed: 3000,
         responsive: [
             {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 3
-              }
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                },
             },
             {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 2
-              }
-            }
-          ]
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+        ],
     });
 });

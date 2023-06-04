@@ -13,24 +13,18 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProfileModule } from './profile/profile.module';
 import { MultiSelectComponent } from './shared/multi-select/multi-select.component';
 
-
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-    ContentComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AuthModule,
-    ProfileModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, SidebarComponent, ContentComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AuthModule,
+        ProfileModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFireDatabaseModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

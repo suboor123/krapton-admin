@@ -3,106 +3,106 @@
     : Custom - Toolbar js :
 -------------------------------
 */
-"use strict";
-$(document).ready(function(){    
-    /* -- Toolbar - Primary -- */   
+'use strict';
+$(document).ready(function () {
+    /* -- Toolbar - Primary -- */
     $('#primary-toolbar').toolbar({
-      content: '#primary-toolbar-options',
-      style: 'primary'
+        content: '#primary-toolbar-options',
+        style: 'primary',
     });
-    /* -- Toolbar - Secondary -- */   
+    /* -- Toolbar - Secondary -- */
     $('#secondary-toolbar').toolbar({
-      content: '#secondary-toolbar-options',
-      style: 'secondary'
+        content: '#secondary-toolbar-options',
+        style: 'secondary',
     });
-    /* -- Toolbar - Success -- */   
+    /* -- Toolbar - Success -- */
     $('#success-toolbar').toolbar({
-      content: '#success-toolbar-options',
-      style: 'success'
+        content: '#success-toolbar-options',
+        style: 'success',
     });
-    /* -- Toolbar - Danger -- */   
+    /* -- Toolbar - Danger -- */
     $('#danger-toolbar').toolbar({
-      content: '#danger-toolbar-options',
-      style: 'danger'
+        content: '#danger-toolbar-options',
+        style: 'danger',
     });
-    /* -- Toolbar - Warning -- */   
+    /* -- Toolbar - Warning -- */
     $('#warning-toolbar').toolbar({
-      content: '#warning-toolbar-options',
-      style: 'warning'
+        content: '#warning-toolbar-options',
+        style: 'warning',
     });
-    /* -- Toolbar - Info -- */   
+    /* -- Toolbar - Info -- */
     $('#info-toolbar').toolbar({
-      content: '#info-toolbar-options',
-      style: 'info'
+        content: '#info-toolbar-options',
+        style: 'info',
     });
-    /* -- Toolbar - Light -- */   
+    /* -- Toolbar - Light -- */
     $('#light-toolbar').toolbar({
-      content: '#light-toolbar-options',
-      style: 'light'
+        content: '#light-toolbar-options',
+        style: 'light',
     });
-    /* -- Toolbar - Dark -- */   
+    /* -- Toolbar - Dark -- */
     $('#dark-toolbar').toolbar({
-      content: '#dark-toolbar-options',
-      style: 'dark'
+        content: '#dark-toolbar-options',
+        style: 'dark',
     });
-    /* -- Toolbar - Top -- */   
+    /* -- Toolbar - Top -- */
     $('#top-toolbar').toolbar({
-      content: '#top-toolbar-options', 
-      position: 'top',
-      style: 'primary'
+        content: '#top-toolbar-options',
+        position: 'top',
+        style: 'primary',
     });
-    /* -- Toolbar - Right -- */   
+    /* -- Toolbar - Right -- */
     $('#right-toolbar').toolbar({
-      content: '#right-toolbar-options', 
-      position: 'right',
-      style: 'success'
+        content: '#right-toolbar-options',
+        position: 'right',
+        style: 'success',
     });
-    /* -- Toolbar - Bottom -- */   
+    /* -- Toolbar - Bottom -- */
     $('#bottom-toolbar').toolbar({
-      content: '#bottom-toolbar-options', 
-      position: 'bottom',
-      style: 'danger'
+        content: '#bottom-toolbar-options',
+        position: 'bottom',
+        style: 'danger',
     });
-    /* -- Toolbar - Left -- */   
+    /* -- Toolbar - Left -- */
     $('#left-toolbar').toolbar({
-      content: '#left-toolbar-options', 
-      position: 'left',
-      style: 'warning'
+        content: '#left-toolbar-options',
+        position: 'left',
+        style: 'warning',
     });
-    /* -- Toolbar - On Click -- */   
+    /* -- Toolbar - On Click -- */
     $('#onclick-toolbar').toolbar({
-      content: '#onclick-toolbar-options', 
-      event: 'click',
-      style: 'info'
+        content: '#onclick-toolbar-options',
+        event: 'click',
+        style: 'info',
     });
-    /* -- Toolbar - Standard -- */   
+    /* -- Toolbar - Standard -- */
     $('#standard-toolbar').toolbar({
-      content: '#standard-toolbar-options',
-      style: 'primary',
-      animation: 'standard',
+        content: '#standard-toolbar-options',
+        style: 'primary',
+        animation: 'standard',
     });
-    /* -- Toolbar - Flip -- */   
+    /* -- Toolbar - Flip -- */
     $('#flip-toolbar').toolbar({
-      content: '#flip-toolbar-options',
-      style: 'success',
-      animation: 'flip'
+        content: '#flip-toolbar-options',
+        style: 'success',
+        animation: 'flip',
     });
-    /* -- Toolbar - Grow -- */   
+    /* -- Toolbar - Grow -- */
     $('#grow-toolbar').toolbar({
-      content: '#grow-toolbar-options',
-      style: 'danger',
-      animation: 'grow'
+        content: '#grow-toolbar-options',
+        style: 'danger',
+        animation: 'grow',
     });
-    /* -- Toolbar - Flyin -- */   
+    /* -- Toolbar - Flyin -- */
     $('#flyin-toolbar').toolbar({
-      content: '#flyin-toolbar-options',
-      style: 'warning',
-      animation: 'flyin'
+        content: '#flyin-toolbar-options',
+        style: 'warning',
+        animation: 'flyin',
     });
-    /* -- Toolbar - Bounce -- */   
+    /* -- Toolbar - Bounce -- */
     $('#bounce-toolbar').toolbar({
-      content: '#bounce-toolbar-options',
-      style: 'info',
-      animation: 'bounce'
+        content: '#bounce-toolbar-options',
+        style: 'info',
+        animation: 'bounce',
     });
 });

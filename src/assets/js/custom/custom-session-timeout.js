@@ -3,8 +3,8 @@
     : Custom - Session Timeout js :
 ---------------------------------------
 */
-"use strict";
-$(document).ready(function() {     
+'use strict';
+$(document).ready(function () {
     $.sessionTimeout({
         message: 'Your session will be locked in one minute.',
         keepAliveUrl: 'advanced-ui-kits-session-timeout.html',
@@ -14,6 +14,6 @@ $(document).ready(function() {
         redirAfter: 35000,
         ignoreUserActivity: true,
         countdownMessage: 'Redirecting in {timer} seconds.',
-        countdownBar: true
+        countdownBar: true,
     });
 });

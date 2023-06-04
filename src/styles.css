@@ -11,6 +11,7 @@ button:disabled {
     cursor: no-drop !important;
 }
 
-button, a {
+button,
+a {
     cursor: pointer;
 }

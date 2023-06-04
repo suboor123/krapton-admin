@@ -6,31 +6,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { MultiSelectComponent } from '../shared/multi-select/multi-select.component';
 
 const routes: Routes = [
-  {
-    path: 'user-profile',
-    component: UserProfileComponent,
-  },
-  {
-    path: 'edit-profile',
-    component: EditProfileComponent,
-  },
+    {
+        path: 'user-profile',
+        component: UserProfileComponent,
+    },
+    {
+        path: 'edit-profile',
+        component: EditProfileComponent,
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 class ProfileRouteModule {}
 
 @NgModule({
-  declarations: [
-    UserProfileComponent,
-    EditProfileComponent,
-    MultiSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    ProfileRouteModule
-  ]
+    declarations: [
+        UserProfileComponent,
+        EditProfileComponent,
+        MultiSelectComponent,
+    ],
+    imports: [CommonModule, ProfileRouteModule],
 })
-export class ProfileModule { }
+export class ProfileModule {}

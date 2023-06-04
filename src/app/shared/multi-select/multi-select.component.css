@@ -6,8 +6,8 @@ ul.list-group {
 }
 
 .list-group-item {
-   border-radius: 0px;
-   padding: 10px;
+    border-radius: 0px;
+    padding: 10px;
 }
 
 .list-group-item:hover {

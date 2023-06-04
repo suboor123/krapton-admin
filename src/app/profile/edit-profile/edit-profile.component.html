@@ -1,144 +1,314 @@
-<div class="col-lg-12" style="margin-top: 100px;">
-  <div class="card m-b-30">
-    <div class="card-header">
-      <h4 class="h4">User Profile</h4>
-    </div>
-    <div class="card-body">
-      <div class="row justify-content-center">
-        <div class="col-lg-12 col-xl-12">
-          <div id="vertical-form-wizard" action="#">
-            <div role="application" class="wizard clearfix vertical" id="steps-uid-1">
-              <div class="steps clearfix">
-                <ul role="tablist">
-                  <li class="first" [ngClass]="activeTab === 'BasicInfo' ? 'current' : ''">
-                    <a><span class="current-info audible">current step: </span>
-                      <span class="number">1</span>
-                      <span class="step-title">Basic Info</span>
-                    </a>
-                  </li>
-
-                  <li class="first" [ngClass]="activeTab === 'TechnicalInfo' ? 'current' : ''">
-                    <a><span class="current-info audible">current step: </span>
-                      <span class="number">2</span>
-                      <span class="step-title">Technical Info</span>
-                    </a>
-                  </li>
-
-                   <li class="first" [ngClass]="activeTab === 'Documents' ? 'current' : ''">
-                    <a><span class="current-info audible">current step: </span>
-                      <span class="number">3</span>
-                      <span class="step-title">Documents</span>
-                    </a>
-                  </li>
-
-                   <li class="first" [ngClass]="activeTab === 'Finish' ? 'current' : ''">
-                    <a><span class="current-info audible">current step: </span>
-                      <span class="number">4</span>
-                      <span class="step-title">Finish</span>
-                    </a>
-                  </li>
-
-
-                </ul>
-              </div>
-              <div class="content clearfix" style="overflow: visible;">
-                <section class="body current" *ngIf="activeTab === 'BasicInfo'">
-                  <h4 class="font-22 mb-3">My Profile</h4>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername">First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername">Last Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername">Email</label>
-                        <input disabled type="text" [value]="auth.currentUserEmail" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername">Phone Number <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername mr-2 d-block" style="display: block;">Gender</label>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="gender" checked>
-                          <label class="form-check-label">
-                            Male
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="gender">
-                          <label class="form-check-label">
-                            Female
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="gender">
-                          <label class="form-check-label">
-                            Other
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="verticalusername">State <span class="text-danger">*</span></label>
-                        <app-multi-select placeholder="Select your state" className="form-control"
-                          [options]="indianStates" (onSelect)="handleSelectState($event)"
-                          [value]="formValues.basicInfo.state"></app-multi-select>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-
-
-                <h3 id="steps-uid-1-h-1" tabindex="-1" class="title">Technical Info</h3>
-                <section class="body current" *ngIf="activeTab === 'TechnicalInfo'">
-                  <h4 class="font-22 mb-3">My Skills</h4>
-                  <div class="row">
-                  </div>
-                </section>
-
-                <h3 id="steps-uid-1-h-2" tabindex="-1" class="title">Documents</h3>
-                <section class="body current" *ngIf="activeTab === 'Documents'">
-                  <h4 class="font-22 mb-3">My Documents</h4>
-                  <div class="row">
-                  </div>
-                </section>
-
-                <h3 id="steps-uid-1-h-3" tabindex="-1" class="title">Finish</h3>
-                <section class="body current" *ngIf="activeTab === 'Finish'">
-                  <h4 class="font-22 mb-3">Looks Good!</h4>
-                  <div class="row">
-                  </div>
-                </section>
-
-
-              </div>
-              <div class="actions clearfix">
-                <ul role="menu" aria-label="Pagination">
-                  <li class="disabled" aria-disabled="true"><a  role="menuitem">Previous</a></li>
-                  <li aria-hidden="false" aria-disabled="false"><a (click)="openNextTab()" role="menuitem">Next</a></li>
-                  <li aria-hidden="true" style="display: none;"><a  role="menuitem">Finish</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+<div class="col-lg-12" style="margin-top: 100px">
+    <div class="card m-b-30">
+        <div class="card-header">
+            <h4 class="h4">User Profile</h4>
         </div>
-      </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 col-xl-12">
+                    <div id="vertical-form-wizard" action="#">
+                        <div
+                            role="application"
+                            class="wizard clearfix vertical"
+                            id="steps-uid-1"
+                        >
+                            <div class="steps clearfix">
+                                <ul role="tablist">
+                                    <li
+                                        class="first"
+                                        [ngClass]="
+                                            activeTab === 'BasicInfo'
+                                                ? 'current'
+                                                : ''
+                                        "
+                                    >
+                                        <a
+                                            ><span class="current-info audible"
+                                                >current step:
+                                            </span>
+                                            <span class="number">1</span>
+                                            <span class="step-title"
+                                                >Basic Info</span
+                                            >
+                                        </a>
+                                    </li>
+
+                                    <li
+                                        class="first"
+                                        [ngClass]="
+                                            activeTab === 'TechnicalInfo'
+                                                ? 'current'
+                                                : ''
+                                        "
+                                    >
+                                        <a
+                                            ><span class="current-info audible"
+                                                >current step:
+                                            </span>
+                                            <span class="number">2</span>
+                                            <span class="step-title"
+                                                >Technical Info</span
+                                            >
+                                        </a>
+                                    </li>
+
+                                    <li
+                                        class="first"
+                                        [ngClass]="
+                                            activeTab === 'Documents'
+                                                ? 'current'
+                                                : ''
+                                        "
+                                    >
+                                        <a
+                                            ><span class="current-info audible"
+                                                >current step:
+                                            </span>
+                                            <span class="number">3</span>
+                                            <span class="step-title"
+                                                >Documents</span
+                                            >
+                                        </a>
+                                    </li>
+
+                                    <li
+                                        class="first"
+                                        [ngClass]="
+                                            activeTab === 'Finish'
+                                                ? 'current'
+                                                : ''
+                                        "
+                                    >
+                                        <a
+                                            ><span class="current-info audible"
+                                                >current step:
+                                            </span>
+                                            <span class="number">4</span>
+                                            <span class="step-title"
+                                                >Finish</span
+                                            >
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div
+                                class="content clearfix"
+                                style="overflow: visible"
+                            >
+                                <section
+                                    class="body current"
+                                    *ngIf="activeTab === 'BasicInfo'"
+                                >
+                                    <h4 class="font-22 mb-3">My Profile</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername"
+                                                    >First Name
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername"
+                                                    >Last Name
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername"
+                                                    >Email</label
+                                                >
+                                                <input
+                                                    disabled
+                                                    type="text"
+                                                    [value]="
+                                                        auth.currentUserEmail
+                                                    "
+                                                    class="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername"
+                                                    >Phone Number
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <input
+                                                    type="number"
+                                                    class="form-control"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label
+                                                    for="verticalusername mr-2 d-block"
+                                                    style="display: block"
+                                                    >Gender</label
+                                                >
+                                                <div
+                                                    class="form-check form-check-inline"
+                                                >
+                                                    <input
+                                                        class="form-check-input"
+                                                        type="radio"
+                                                        name="gender"
+                                                        checked
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                    >
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div
+                                                    class="form-check form-check-inline"
+                                                >
+                                                    <input
+                                                        class="form-check-input"
+                                                        type="radio"
+                                                        name="gender"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                    >
+                                                        Female
+                                                    </label>
+                                                </div>
+                                                <div
+                                                    class="form-check form-check-inline"
+                                                >
+                                                    <input
+                                                        class="form-check-input"
+                                                        type="radio"
+                                                        name="gender"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                    >
+                                                        Other
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername"
+                                                    >State
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <app-multi-select
+                                                    placeholder="Select your state"
+                                                    className="form-control"
+                                                    [options]="indianStates"
+                                                    (onSelect)="
+                                                        handleSelectState(
+                                                            $event
+                                                        )
+                                                    "
+                                                    [value]="
+                                                        formValues.basicInfo
+                                                            .state
+                                                    "
+                                                ></app-multi-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <h3
+                                    id="steps-uid-1-h-1"
+                                    tabindex="-1"
+                                    class="title"
+                                >
+                                    Technical Info
+                                </h3>
+                                <section
+                                    class="body current"
+                                    *ngIf="activeTab === 'TechnicalInfo'"
+                                >
+                                    <h4 class="font-22 mb-3">My Skills</h4>
+                                    <div class="row"></div>
+                                </section>
+
+                                <h3
+                                    id="steps-uid-1-h-2"
+                                    tabindex="-1"
+                                    class="title"
+                                >
+                                    Documents
+                                </h3>
+                                <section
+                                    class="body current"
+                                    *ngIf="activeTab === 'Documents'"
+                                >
+                                    <h4 class="font-22 mb-3">My Documents</h4>
+                                    <div class="row"></div>
+                                </section>
+
+                                <h3
+                                    id="steps-uid-1-h-3"
+                                    tabindex="-1"
+                                    class="title"
+                                >
+                                    Finish
+                                </h3>
+                                <section
+                                    class="body current"
+                                    *ngIf="activeTab === 'Finish'"
+                                >
+                                    <h4 class="font-22 mb-3">Looks Good!</h4>
+                                    <div class="row"></div>
+                                </section>
+                            </div>
+                            <div class="actions clearfix">
+                                <ul role="menu" aria-label="Pagination">
+                                    <li class="disabled" aria-disabled="true">
+                                        <a role="menuitem">Previous</a>
+                                    </li>
+                                    <li
+                                        aria-hidden="false"
+                                        aria-disabled="false"
+                                    >
+                                        <a
+                                            (click)="openNextTab()"
+                                            role="menuitem"
+                                            >Next</a
+                                        >
+                                    </li>
+                                    <li
+                                        aria-hidden="true"
+                                        style="display: none"
+                                    >
+                                        <a role="menuitem">Finish</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

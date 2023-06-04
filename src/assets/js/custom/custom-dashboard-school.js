@@ -3,66 +3,80 @@
     : Custom - Dashboard CRM js :
 ----------------------------------------------
 */
-"use strict";
-$(document).ready(function() {    
+'use strict';
+$(document).ready(function () {
     /* -----  Apex Area Chart ----- */
     var options = {
         chart: {
             height: 238,
             type: 'area',
             toolbar: {
-                show: false
+                show: false,
             },
             zoom: {
-              type: 'x',
-              enabled: false,
-              autoScaleYaxis: true
+                type: 'x',
+                enabled: false,
+                autoScaleYaxis: true,
             },
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         stroke: {
             curve: 'straight',
         },
         colors: ['#0080ff'],
-        series: [{
-            name: 'Percentage',
-            data: [31, 40, 28, 51, 62, 48, 72, 58, 89, 80]
-        }],
+        series: [
+            {
+                name: 'Percentage',
+                data: [31, 40, 28, 51, 62, 48, 72, 58, 89, 80],
+            },
+        ],
         legend: {
             show: false,
         },
         xaxis: {
             type: 'datetime',
-            categories: ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+            categories: [
+                '2011',
+                '2012',
+                '2013',
+                '2014',
+                '2015',
+                '2016',
+                '2017',
+                '2018',
+                '2019',
+                '2020',
+            ],
             axisBorder: {
-                show: true, 
-                color: 'rgba(0,0,0,0.05)'
+                show: true,
+                color: 'rgba(0,0,0,0.05)',
             },
             axisTicks: {
-                show: true, 
-                color: 'rgba(0,0,0,0.05)'
-            }
+                show: true,
+                color: 'rgba(0,0,0,0.05)',
+            },
         },
         grid: {
             row: {
-                colors: ['transparent', 'transparent'], opacity: .2
+                colors: ['transparent', 'transparent'],
+                opacity: 0.2,
             },
-            borderColor: 'rgba(0,0,0,0.05)'
+            borderColor: 'rgba(0,0,0,0.05)',
         },
         tooltip: {
             x: {
-                format: 'dd/MM/yy HH:mm'
+                format: 'dd/MM/yy HH:mm',
             },
-        }
-    }
+        },
+    };
     var chart = new ApexCharts(
-        document.querySelector("#apex-area-chart"),
+        document.querySelector('#apex-area-chart'),
         options
     );
     chart.render();
-    
+
     /* -- Course Slider -- */
     $('.course-slider').slick({
         arrows: true,
@@ -72,7 +86,7 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         prevArrow: '<i class="feather icon-arrow-left"></i>',
-        nextArrow: '<i class="feather icon-arrow-right"></i>'
+        nextArrow: '<i class="feather icon-arrow-right"></i>',
     });
 
     /* -- Parents Slider -- */
@@ -84,6 +98,6 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         prevArrow: '<i class="feather icon-arrow-left"></i>',
-        nextArrow: '<i class="feather icon-arrow-right"></i>'
+        nextArrow: '<i class="feather icon-arrow-right"></i>',
     });
 });
