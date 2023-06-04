@@ -51,6 +51,11 @@ export class AuthService {
                 const { uid, email } = res.user!;
                 localStorage.setItem('user', JSON.stringify({ uid, email }));
                 this.router.navigate(['/profile']);
+            })
+            .catch((err) => {
+                if (err.message) {
+                    Alert.error(err.message);
+                }
             });
     }
 
