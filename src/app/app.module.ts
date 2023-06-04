@@ -11,7 +11,6 @@ import { AuthModule } from './auth/auth.module';
 import { ContentComponent } from './shared/content/content.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProfileModule } from './profile/profile.module';
-import { MultiSelectComponent } from './shared/multi-select/multi-select.component';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, ContentComponent],
