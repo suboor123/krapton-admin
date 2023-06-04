@@ -1,0 +1,41 @@
+<div id="containerbar" class="containerbar authenticate-bg">
+    <!-- Start Container -->
+    <div class="container">
+        <div class="auth-box register-box">
+            <!-- Start row -->
+            <div class="row no-gutters align-items-center justify-content-center">
+                <!-- Start col -->
+                <div class="col-md-6 col-lg-5">
+                    <!-- Start Auth Box -->
+                    <div class="auth-box-right">
+                        <div class="card">
+                            <div class="card-body">
+                                <form (ngSubmit)="handleSubmit()">
+                                    <div class="form-head">
+                                        <a  class="logo"><img src="assets/images/logo.png" class="img-fluid" alt="logo"></a>
+                                    </div> 
+                                    <h4 class="text-primary my-4">Sign Up !</h4>
+                                    <div class="form-group">
+                                        <input type="email" (keyup)="handleChange()" [(ngModel)]="authCredentials.email" [ngModelOptions]="{standalone: true}" class="form-control" id="email" placeholder="Enter Email here" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" (keyup)="handleChange()" [(ngModel)]="authCredentials.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password" placeholder="Enter Password here" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password"  (keyup)="handleChange()" [(ngModel)]="authCredentials.confirmPassword" [ngModelOptions]="{standalone: true}" class="form-control" id="re-password" placeholder="Re-Type Password" required>
+                                    </div>                       
+                                  <button type="submit" class="btn btn-success btn-lg btn-block font-18" [disabled]="disbaledSbtmBtn">Register</button>
+                                </form>
+                                <p class="mb-0 mt-3">Already have an account? <a routerLink="/auth/login">Log in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Auth Box -->
+                </div>
+                <!-- End col -->
+            </div>
+            <!-- End row -->
+        </div>
+    </div>
+    <!-- End Container -->
+</div>

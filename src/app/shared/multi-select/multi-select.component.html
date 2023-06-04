@@ -1,0 +1,6 @@
+<div style="position: relative;">
+    <input type="text" [class]="className" [placeholder]="placeholder" [value]="value" (keyup)="handleUserInput($event)" />
+<ul class="list-group" *ngIf="showOptions">
+    <li class="list-group-item" *ngFor="let opt of multiselectOpt" (click)="handleSelect(opt)">{{opt}}</li>
+  </ul>
+</div>
