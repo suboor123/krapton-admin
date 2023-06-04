@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UnsubscribeOnDestroy } from 'src/app/decorators/unsubscribe';
 import { AuthService } from 'src/app/services/auth.service';
 import { debounce } from 'src/app/utils/debounce';
 
+@UnsubscribeOnDestroy()
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
