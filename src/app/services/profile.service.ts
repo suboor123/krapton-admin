@@ -11,8 +11,8 @@ import { User } from '../types/user';
 export class ProfileService {
     private path: string = 'user';
 
-    private currentUserSubject: BehaviorSubject<User | {}> =
-        new BehaviorSubject({});
+    private currentUserSubject: BehaviorSubject<User | undefined> =
+        new BehaviorSubject(undefined as any);
     public currentUser$ = this.currentUserSubject.asObservable();
 
     constructor(private fb: AngularFireDatabase) {}
