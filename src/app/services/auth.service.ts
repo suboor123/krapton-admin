@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Alert } from '../lib/alert';
 import { AuthCredentials } from '../types/auth';
 import { firebase } from '@firebase/app';
+import { ProfileService } from './profile.service';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +12,8 @@ import { firebase } from '@firebase/app';
 export class AuthService {
     constructor(
         private firebaseAuth: AngularFireAuth,
-        private router: Router
+        private router: Router,
+        private profile: ProfileService
     ) {}
 
     async signUp(credentials: AuthCredentials): Promise<void> {
@@ -35,7 +37,7 @@ export class AuthService {
             .then((res) => {
                 const { uid, email } = res.user!;
                 localStorage.setItem('user', JSON.stringify({ uid, email }));
-                this.router.navigate(['/profile']);
+                this.redirectUserAfterLogin(uid);
             })
             .catch((err) => {
                 if (err.message) {
@@ -50,7 +52,7 @@ export class AuthService {
             .then((res) => {
                 const { uid, email } = res.user!;
                 localStorage.setItem('user', JSON.stringify({ uid, email }));
-                this.router.navigate(['/profile']);
+                this.redirectUserAfterLogin(uid);
             })
             .catch((err) => {
                 if (err.message) {
@@ -74,5 +76,15 @@ export class AuthService {
             const user = JSON.parse(u);
             return user.email;
         }
+    }
+
+    private redirectUserAfterLogin(userId: string): void {
+        this.profile.syncById(userId).subscribe((user) => {
+            if (!user) {
+                this.router.navigate(['/profile/edit-profile']);
+                return;
+            }
+            this.router.navigate(['/dashboard']);
+        });
     }
 }
