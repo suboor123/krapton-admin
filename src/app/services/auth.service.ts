@@ -14,7 +14,7 @@ export class AuthService {
         private router: Router
     ) {}
 
-    async signUp(credentials: AuthCredentials) {
+    async signUp(credentials: AuthCredentials): Promise<void> {
         const { email, password } = credentials;
         return this.firebaseAuth
             .createUserWithEmailAndPassword(email, password)
@@ -28,7 +28,7 @@ export class AuthService {
             });
     }
 
-    async login(credentials: AuthCredentials) {
+    async login(credentials: AuthCredentials): Promise<void> {
         const { email, password } = credentials;
         return this.firebaseAuth
             .signInWithEmailAndPassword(email, password)
@@ -44,7 +44,7 @@ export class AuthService {
             });
     }
 
-    async loginByGoogle() {
+    async loginByGoogle(): Promise<void> {
         this.firebaseAuth
             .signInWithPopup(new (firebase as any).auth.GoogleAuthProvider())
             .then((res) => {

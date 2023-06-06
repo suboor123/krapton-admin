@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { from } from 'rxjs';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
+import { from, Observable } from 'rxjs';
+import { Department } from '../types/department';
+import { Position } from '../types/position';
 import { User } from '../types/user';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ProfileService {
-    private path = 'user';
+    private path: string = 'user';
 
     constructor(private fb: AngularFireDatabase) {}
 
-    async createUser(user: User) {
+    async createUser(user: User): Promise<User> {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
-        return from(this.fb.database.ref(`${this.path}/${userId}`).set(user));
+        return this.fb.database.ref(`${this.path}/${userId}`).set({
+            ...user,
+            position: Position.Unassigned,
+            department: Department.Unassigned,
+        });
     }
 
-    syncById(uid: string) {
-        return from(this.fb.database.ref(`${this.path}/${uid}`).get());
+    syncById(uid: string): Observable<SnapshotAction<User>> {
+        return this.fb.object<User>(`${this.path}/${uid}`).snapshotChanges();
     }
 }
