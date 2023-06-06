@@ -25,4 +25,8 @@ export class ProfileService {
     syncById(uid: string): Observable<SnapshotAction<User>> {
         return this.fb.object<User>(`${this.path}/${uid}`).snapshotChanges();
     }
+
+    syncAll(): Observable<SnapshotAction<User>[]> {
+        return this.fb.list<User>(this.path).snapshotChanges();
+    }
 }
