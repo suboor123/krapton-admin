@@ -11,9 +11,15 @@ import { AuthModule } from './auth/auth.module';
 import { ContentComponent } from './shared/content/content.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProfileModule } from './profile/profile.module';
+import { LazyImageDirective } from './directives/lazy-image.directive';
 
 @NgModule({
-    declarations: [AppComponent, SidebarComponent, ContentComponent],
+    declarations: [
+        AppComponent,
+        SidebarComponent,
+        ContentComponent,
+        LazyImageDirective,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,

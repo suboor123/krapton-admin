@@ -87,14 +87,13 @@ export class AuthService {
     }
 
     private redirectUserAfterLogin(userId: string): void {
-        console.log(userId, ' @@@userId');
-        this.profile.syncById(userId).subscribe((user) => {
+        this.profile.syncById(userId).subscribe((snapshot) => {
             Spinner.hide();
-            if (!user.payload.exists()) {
+            if (!snapshot.exists()) {
                 this.router.navigate(['/profile/edit-profile']);
                 return;
             }
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/profile']);
         });
     }
 }

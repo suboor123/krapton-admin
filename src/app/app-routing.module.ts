@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProfileResolver } from './resolvers/profile.resolver';
 
 const routes: Routes = [
     {
@@ -23,11 +24,15 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () =>
             import('./profile/profile.module').then((m) => m.ProfileModule),
+        resolve: {
+            routeResolver: ProfileResolver,
+        },
     },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
+    providers: [ProfileResolver],
 })
 export class AppRoutingModule {}

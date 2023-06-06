@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
+import { DataSnapshot } from '@angular/fire/database/interfaces';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { Department } from '../types/department';
 import { Position } from '../types/position';
@@ -10,11 +11,6 @@ import { User } from '../types/user';
 })
 export class ProfileService {
     private path: string = 'users';
-
-    private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(
-        undefined as any
-    );
-    public currentUser$ = this.currentUserSubject.asObservable();
 
     constructor(private fb: AngularFireDatabase) {}
 
@@ -27,23 +23,16 @@ export class ProfileService {
         });
     }
 
-    public syncCurrentUser(): void {
+    public getCurrentUser(): Observable<DataSnapshot> {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
-        this.syncById(userId).subscribe((snapshot) => {
-            if (snapshot.payload.exists()) {
-                this.currentUserSubject.next({
-                    id: snapshot.payload.key as string,
-                    ...snapshot.payload.val(),
-                } as User);
-            }
-        });
+        return this.syncById(userId);
     }
 
-    public syncById(uid: string): Observable<SnapshotAction<User>> {
-        return this.fb.object<User>(`${this.path}/${uid}`).snapshotChanges();
+    public syncById(uid: string): Observable<DataSnapshot> {
+        return from(this.fb.database.ref(`${this.path}/${uid}`).get());
     }
 
-    public syncAll(): Observable<SnapshotAction<User>[]> {
-        return this.fb.list<User>(this.path).snapshotChanges();
+    public syncAll(): Observable<DataSnapshot> {
+        return from(this.fb.database.ref(`${this.path}`).get());
     }
 }
