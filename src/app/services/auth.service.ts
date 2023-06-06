@@ -5,6 +5,7 @@ import { Alert } from '../lib/alert';
 import { AuthCredentials } from '../types/auth';
 import { firebase } from '@firebase/app';
 import { ProfileService } from './profile.service';
+import { Spinner } from '../lib/spinner';
 
 @Injectable({
     providedIn: 'root',
@@ -18,12 +19,15 @@ export class AuthService {
 
     async signUp(credentials: AuthCredentials): Promise<void> {
         const { email, password } = credentials;
+        Spinner.show();
         return this.firebaseAuth
             .createUserWithEmailAndPassword(email, password)
             .then((res) => {
+                Spinner.hide();
                 this.router.navigate(['/auth/login']);
             })
             .catch((err) => {
+                Spinner.hide();
                 if (err.message) {
                     Alert.error(err.message);
                 }
@@ -32,6 +36,7 @@ export class AuthService {
 
     async login(credentials: AuthCredentials): Promise<void> {
         const { email, password } = credentials;
+        Spinner.show();
         return this.firebaseAuth
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
@@ -40,6 +45,7 @@ export class AuthService {
                 this.redirectUserAfterLogin(uid);
             })
             .catch((err) => {
+                Spinner.hide();
                 if (err.message) {
                     Alert.error(err.message);
                 }
@@ -47,6 +53,7 @@ export class AuthService {
     }
 
     async loginByGoogle(): Promise<void> {
+        Spinner.show();
         this.firebaseAuth
             .signInWithPopup(new (firebase as any).auth.GoogleAuthProvider())
             .then((res) => {
@@ -55,6 +62,7 @@ export class AuthService {
                 this.redirectUserAfterLogin(uid);
             })
             .catch((err) => {
+                Spinner.hide();
                 if (err.message) {
                     Alert.error(err.message);
                 }
@@ -80,6 +88,7 @@ export class AuthService {
 
     private redirectUserAfterLogin(userId: string): void {
         this.profile.syncById(userId).subscribe((user) => {
+            Spinner.hide();
             if (!user.payload.exists()) {
                 this.router.navigate(['/profile/edit-profile']);
                 return;

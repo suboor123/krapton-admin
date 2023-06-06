@@ -8,12 +8,24 @@
         <base href="/" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <style>
+            .loader-spinner {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.161);
+                align-items: center;
+            }
+        </style>
     </head>
 
     <body class="vertical-layout">
         <div id="containerbar">
             <app-root></app-root>
         </div>
+        <div id="loader-wrapper"></div>
 
         <!-- Start js -->
         <script src="assets/js/jquery.min.js"></script>
