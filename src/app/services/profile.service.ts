@@ -11,8 +11,9 @@ import { User } from '../types/user';
 export class ProfileService {
     private path: string = 'user';
 
-    private currentUserSubject: BehaviorSubject<User | undefined> =
-        new BehaviorSubject(undefined as any);
+    private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(
+        undefined as any
+    );
     public currentUser$ = this.currentUserSubject.asObservable();
 
     constructor(private fb: AngularFireDatabase) {}
@@ -31,9 +32,9 @@ export class ProfileService {
         this.syncById(userId).subscribe((snapshot) => {
             if (snapshot.payload.exists()) {
                 this.currentUserSubject.next({
-                    id: snapshot.payload.key,
+                    id: snapshot.payload.key as string,
                     ...snapshot.payload.val(),
-                });
+                } as User);
             }
         });
     }
