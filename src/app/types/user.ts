@@ -20,4 +20,6 @@ export interface User {
     role: UserRole;
     position: Position;
     skills: string[];
+    githubUrl?: string;
+    linkedInUrl?: string;
 }

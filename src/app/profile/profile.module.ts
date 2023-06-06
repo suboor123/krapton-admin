@@ -7,7 +7,7 @@ import { MultiSelectComponent } from '../shared/multi-select/multi-select.compon
 
 const routes: Routes = [
     {
-        path: 'user-profile',
+        path: '',
         component: UserProfileComponent,
     },
     {
