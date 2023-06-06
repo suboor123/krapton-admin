@@ -87,6 +87,7 @@ export class AuthService {
     }
 
     private redirectUserAfterLogin(userId: string): void {
+        console.log(userId, ' @@@userId');
         this.profile.syncById(userId).subscribe((user) => {
             Spinner.hide();
             if (!user.payload.exists()) {

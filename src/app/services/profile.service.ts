@@ -9,7 +9,7 @@ import { User } from '../types/user';
     providedIn: 'root',
 })
 export class ProfileService {
-    private path: string = 'user';
+    private path: string = 'users';
 
     private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(
         undefined as any
