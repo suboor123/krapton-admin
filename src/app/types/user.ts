@@ -5,6 +5,7 @@ import { UserRole } from './role';
 export type Gender = 'male' | 'female' | 'other';
 
 export interface User {
+    id?: string;
     email: string;
     password: string;
     firstName: string;
