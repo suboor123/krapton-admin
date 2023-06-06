@@ -80,7 +80,7 @@ export class AuthService {
 
     private redirectUserAfterLogin(userId: string): void {
         this.profile.syncById(userId).subscribe((user) => {
-            if (!user) {
+            if (!user.payload.exists()) {
                 this.router.navigate(['/profile/edit-profile']);
                 return;
             }
