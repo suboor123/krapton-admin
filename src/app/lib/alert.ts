@@ -1,9 +1,9 @@
 export class Alert {
-    static success(message: string, heading?: string) {
+    public static success(message: string, heading?: string) {
         alert(message);
     }
 
-    static error(message: string, heading?: string) {
+    public static error(message: string, heading?: string) {
         alert(message);
     }
 }

@@ -12,6 +12,11 @@ import { User } from '../types/user';
 export class ProfileService {
     private path: string = 'users';
 
+    private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(
+        null as any
+    );
+    public currentUserObserver$ = this.currentUserSubject.asObservable();
+
     constructor(private fb: AngularFireDatabase) {}
 
     public async createUser(user: User): Promise<User> {
@@ -26,6 +31,18 @@ export class ProfileService {
     public getCurrentUser(): Observable<DataSnapshot> {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
         return this.syncById(userId);
+    }
+
+    public refreshCurrentUserProfile(): void {
+        const userId = JSON.parse(localStorage.getItem('user')!).uid;
+        this.syncById(userId).subscribe((snapshot) => {
+            if (snapshot.exists()) {
+                this.currentUserSubject.next({
+                    id: snapshot.key,
+                    ...snapshot.val(),
+                });
+            }
+        });
     }
 
     public syncById(uid: string): Observable<DataSnapshot> {
