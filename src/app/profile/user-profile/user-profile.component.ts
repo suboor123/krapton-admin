@@ -22,13 +22,20 @@ export class UserProfileComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.userSubscription = this.actRoute.data.subscribe((data) => {
-            const snapshot = data.routeResolver as DataSnapshot;
-            if (snapshot.exists()) {
+        this.userSubscription = this.profile.currentUserObserver$.subscribe(
+            (user) => {
+                this.user = user;
+            }
+        );
+
+        this.actRoute.data.subscribe((data) => {
+            const snapshot = data.profileResolver as DataSnapshot;
+            if (snapshot && snapshot.exists()) {
                 this.user = {
                     id: snapshot.key,
                     ...snapshot.val(),
                 };
+                this.profile.currentUserSubject.next(this.user as User);
             }
         });
     }
