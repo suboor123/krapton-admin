@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
     public disbaledSbtmBtn = true;
 
     public authCredentials: AuthCredentials = {
-        email: '',
-        password: '',
+        email: 'admin@gmail.com',
+        password: 'admin@123',
     };
 
     constructor(public auth: AuthService) {}

@@ -5,8 +5,8 @@ import { UserRole } from './role';
 export type Gender = 'male' | 'female' | 'other';
 
 export interface User {
+    id?: string;
     email: string;
-    password: string;
     firstName: string;
     lastName: string;
     phoneNumber: number;
@@ -19,4 +19,6 @@ export interface User {
     role: UserRole;
     position: Position;
     skills: string[];
+    githubUrl?: string;
+    linkedInUrl?: string;
 }
