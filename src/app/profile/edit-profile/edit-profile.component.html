@@ -50,40 +50,74 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="verticalusername">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" />
+                                                <input
+                                                    type="text"
+                                                    [(ngModel)]="formValues.basicInfo.firstName"
+                                                    class="form-control"
+                                                    required
+                                                />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="verticalusername">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" />
+                                                <input
+                                                    type="text"
+                                                    [(ngModel)]="formValues.basicInfo.lastName"
+                                                    class="form-control"
+                                                    required
+                                                />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="verticalusername">Email</label>
-                                                <input disabled type="text" [value]="auth.currentUserEmail" class="form-control" />
+                                                <input disabled type="text" [value]="auth.currentUserEmail" class="form-control" required />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="verticalusername">Phone Number <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" />
+                                                <input
+                                                    type="number"
+                                                    [(ngModel)]="formValues.basicInfo.phoneNumber"
+                                                    class="form-control"
+                                                    required
+                                                />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="verticalusername mr-2 d-block" style="display: block">Gender</label>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="gender" checked />
+                                                    <input
+                                                        class="form-check-input"
+                                                        [(ngModel)]="formValues.basicInfo.gender"
+                                                        value="male"
+                                                        type="radio"
+                                                        name="gender"
+                                                        checked
+                                                    />
                                                     <label class="form-check-label"> Male </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="gender" />
+                                                    <input
+                                                        class="form-check-input"
+                                                        [(ngModel)]="formValues.basicInfo.gender"
+                                                        value="female"
+                                                        type="radio"
+                                                        name="gender"
+                                                    />
                                                     <label class="form-check-label"> Female </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="gender" />
+                                                    <input
+                                                        class="form-check-input"
+                                                        [(ngModel)]="formValues.basicInfo.gender"
+                                                        value="other"
+                                                        type="radio"
+                                                        name="gender"
+                                                    />
                                                     <label class="form-check-label"> Other </label>
                                                 </div>
                                             </div>
@@ -106,31 +140,125 @@
                                 <h3 id="steps-uid-1-h-1" tabindex="-1" class="title">Technical Info</h3>
                                 <section class="body current" *ngIf="activeTab === 'TechnicalInfo'">
                                     <h4 class="font-22 mb-3">My Skills</h4>
-                                    <div class="row"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Experiance <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" [(ngModel)]="formValues.skillInfo.experiance" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Skill <span class="text-danger">*</span></label>
+                                                <ng-multiselect-dropdown
+                                                    [placeholder]="'Skills'"
+                                                    [settings]="dropdownSettings"
+                                                    [data]="dropdownList"
+                                                    [(ngModel)]="selectedItems"
+                                                    (onSelect)="onSkillsSelect()"
+                                                    (onSelectAll)="onAllSkillSelect()"
+                                                >
+                                                </ng-multiselect-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="verticalusername">About Me <span class="text-danger">*</span></label>
+                                                <textarea class="form-control" [(ngModel)]="formValues.skillInfo.aboutMe"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </section>
 
                                 <h3 id="steps-uid-1-h-2" tabindex="-1" class="title">Documents</h3>
                                 <section class="body current" *ngIf="activeTab === 'Documents'">
                                     <h4 class="font-22 mb-3">My Documents</h4>
-                                    <div class="row"></div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>This section will be coming soon!....</h5>
+                                        </div>
+                                    </div>
                                 </section>
 
                                 <h3 id="steps-uid-1-h-3" tabindex="-1" class="title">Finish</h3>
                                 <section class="body current" *ngIf="activeTab === 'Finish'">
-                                    <h4 class="font-22 mb-3">Looks Good!</h4>
-                                    <div class="row"></div>
+                                    <h4 class="font-22 mb-3">Review</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername"><b>Name</b></label>
+                                                <div>{{ formValues.basicInfo.firstName }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Last Name</label>
+                                                <div>{{ formValues.basicInfo.lastName }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Email</label>
+                                                <div>{{ auth.currentUserEmail }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Phone Number</label>
+                                                <div>{{ formValues.basicInfo.phoneNumber }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Gender</label>
+                                                <div>{{ formValues.basicInfo.gender }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">State</label>
+                                                <div>{{ formValues.basicInfo.state }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Experiance</label>
+                                                <div>{{ formValues.skillInfo.experiance }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">Skills</label>
+                                                <div>{{ formValues.skillInfo.skills }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="verticalusername">About Me</label>
+                                                <div>{{ formValues.skillInfo.aboutMe }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </section>
                             </div>
                             <div class="actions clearfix">
                                 <ul role="menu" aria-label="Pagination">
-                                    <li class="disabled" aria-disabled="true">
-                                        <a role="menuitem">Previous</a>
-                                    </li>
                                     <li aria-hidden="false" aria-disabled="false">
-                                        <a (click)="openNextTab()" role="menuitem">Next</a>
+                                        <span *ngIf="activeTab !== 'BasicInfo'">
+                                            <a (click)="openPreviousTab()" role="menuitem">Previous</a>
+                                        </span>
                                     </li>
-                                    <li aria-hidden="true" style="display: none">
-                                        <a role="menuitem">Finish</a>
+
+                                    <li aria-hidden="false" aria-disabled="false">
+                                        <span *ngIf="activeTab !== 'Finish'">
+                                            <a (click)="openNextTab(activeTab)" role="menuitem">Next</a>
+                                        </span>
+                                    </li>
+
+                                    <li aria-hidden="true">
+                                        <span *ngIf="activeTab === 'Finish'">
+                                            <a role="menuitem">Finish</a>
+                                        </span>
                                     </li>
                                 </ul>
                             </div>

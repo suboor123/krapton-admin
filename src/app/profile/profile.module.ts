@@ -4,6 +4,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MultiSelectComponent } from '../shared/multi-select/multi-select.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -28,6 +30,11 @@ class ProfileRouteModule {}
         EditProfileComponent,
         MultiSelectComponent,
     ],
-    imports: [CommonModule, ProfileRouteModule],
+    imports: [
+        CommonModule,
+        ProfileRouteModule,
+        NgMultiSelectDropDownModule.forRoot(),
+        FormsModule,
+    ],
 })
 export class ProfileModule {}

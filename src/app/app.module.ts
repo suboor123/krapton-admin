@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { AuthModule } from './module/auth/auth.module';
 import { ContentComponent } from './shared/content/content.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProfileModule } from './profile/profile.module';
+import { FormsModule } from '@angular/forms';
 import { LazyImageDirective } from './directives/lazy-image.directive';
 
 @NgModule({
@@ -28,8 +29,10 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
