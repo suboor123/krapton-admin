@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './module/auth/auth.module';
 import { ContentComponent } from './shared/content/content.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { ProfileModule } from './profile/profile.module';
+import { ProfileModule } from './module/profile/profile.module';
 import { FormsModule } from '@angular/forms';
 import { LazyImageDirective } from './directives/lazy-image.directive';
 

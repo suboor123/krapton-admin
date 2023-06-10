@@ -29,7 +29,9 @@ const routes: Routes = [
     {
         path: 'profile',
         loadChildren: () =>
-            import('./profile/profile.module').then((m) => m.ProfileModule),
+            import('./module/profile/profile.module').then(
+                (m) => m.ProfileModule
+            ),
         resolve: {
             profileResolver: ProfileResolver,
         },
