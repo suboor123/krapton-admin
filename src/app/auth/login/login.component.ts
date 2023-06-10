@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UnsubscribeOnDestroy } from 'src/app/decorators/unsubscribe';
+// import { UnsubscribeOnDestroy } from 'src/app/decorators/unsubscribe';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthCredentials } from 'src/app/types/auth';
 import { debounce } from 'src/app/utils/debounce';
 
-@UnsubscribeOnDestroy()
+// @UnsubscribeOnDestroy()
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
