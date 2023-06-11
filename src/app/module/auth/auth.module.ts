@@ -20,7 +20,7 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-class AuthRouteModule {}
+export class AuthRouteModule {}
 
 @NgModule({
     declarations: [LoginComponent, RegisterComponent],

@@ -14,7 +14,7 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-class DashboardRouteModule {}
+export class DashboardRouteModule {}
 
 @NgModule({
     declarations: [LandingComponent],

@@ -7,11 +7,15 @@ const constructSpinnerHtml = () => `
 
 export class Spinner {
     public static show() {
-        this.element!.innerHTML = constructSpinnerHtml();
+        if (this.element) {
+            this.element.innerHTML = constructSpinnerHtml();
+        }
     }
 
     public static hide() {
-        this.element!.innerHTML = '';
+        if (this.element) {
+            this.element!.innerHTML = '';
+        }
     }
 
     private static get element() {

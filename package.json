@@ -21,6 +21,7 @@
         "@angular/platform-browser": "~11.2.14",
         "@angular/platform-browser-dynamic": "~11.2.14",
         "@angular/router": "~11.2.14",
+        "@kolkov/angular-editor": "^1.2.0",
         "firebase": "^8.10.1",
         "ng-multiselect-dropdown": "^0.3.9",
         "rxjs": "~6.6.0",

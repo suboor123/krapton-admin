@@ -1,24 +1,28 @@
-import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from './board/board.component';
 import { CardComponent } from './card/card.component';
-import { Routes, RouterModule } from '@angular/router';
-
-const routes: Routes = [
-    {
-        path: '',
-        component: BoardComponent,
-    },
-];
+import { BoardHeaderComponent } from './board-header/board-header.component';
+import { TaskBoardRouteModule } from './task-board-router.module';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-})
-class TaskBoardRouteModule {}
-
-@NgModule({
-    declarations: [BoardComponent, CardComponent],
-    imports: [CommonModule, TaskBoardRouteModule],
+    declarations: [
+        BoardComponent,
+        CardComponent,
+        BoardHeaderComponent,
+        TaskFormComponent,
+    ],
+    imports: [
+        SharedModule,
+        CommonModule,
+        TaskBoardRouteModule,
+        NgMultiSelectDropDownModule.forRoot(),
+        FormsModule,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TaskModule {}

@@ -1,0 +1,31 @@
+<form>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Title <span class="text-danger">*</span></label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Description <span class="text-danger">*</span></label>
+        <div class="col-sm-12">
+            <app-editor [onChange]="handleContentChange.bind(this)"></app-editor>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Assignee</label>
+        <div class="col-sm-12">
+            <ng-multiselect-dropdown
+                [placeholder]="'Assignee'"
+                [settings]="dropdownSettings"
+                (onSelect)="handleSelectAssignee($event)"
+                [data]="assigneeDropdown"
+            >
+            </ng-multiselect-dropdown>
+        </div>
+    </div>
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Create</button>
+</div>

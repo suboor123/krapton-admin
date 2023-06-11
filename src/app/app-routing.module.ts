@@ -7,7 +7,7 @@ import { TaskResolver } from './resolvers/task.resolver';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/auth/login',
+        redirectTo: '/tasks',
         pathMatch: 'full',
     },
     {
