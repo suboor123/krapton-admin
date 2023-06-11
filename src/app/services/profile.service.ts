@@ -6,6 +6,7 @@ import { Department } from '../types/department';
 import { Position } from '../types/position';
 import { User } from '../types/user';
 import { FirebaseDataSerializer } from '../lib/firebase-serializer';
+import { Alert } from '../lib/alert';
 
 @Injectable({
     providedIn: 'root',
@@ -34,6 +35,15 @@ export class ProfileService {
         });
     }
 
+    public refreshCurrentUser() {
+        this.getCurrentUser().subscribe((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+                const payload = snapshot.val();
+                this.currentUserSubject.next({ id: snapshot.key!, ...payload });
+            }
+        });
+    }
+
     public getCurrentUser(): Observable<DataSnapshot> {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
         return this.syncById(userId);
@@ -44,15 +54,22 @@ export class ProfileService {
     }
 
     public refreshAllUsers() {
-        this.syncAll().subscribe((snapshot) => {
-            if (snapshot && snapshot.exists()) {
-                const payload = snapshot.val();
-                const users = new FirebaseDataSerializer<User>(
-                    payload
-                ).serialize();
-                this.allUsersSubject.next(users);
+        this.syncAll().subscribe(
+            (snapshot) => {
+                if (snapshot && snapshot.exists()) {
+                    const payload = snapshot.val();
+                    const users = new FirebaseDataSerializer<User>(
+                        payload
+                    ).serialize();
+                    this.allUsersSubject.next(users);
+                }
+            },
+            (err) => {
+                if (err.message) {
+                    Alert.error(err.message);
+                }
             }
-        });
+        );
     }
     public syncAll(): Observable<DataSnapshot> {
         return from(this.fb.database.ref(`${this.path}`).get());
