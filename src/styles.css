@@ -33,3 +33,24 @@ a {
     background-color: rgba(0, 0, 0, 0.331);
     z-index: 99;
 }
+
+.dropdown-btn {
+    border-radius: 0px !important;
+    border: 0.1px solid rgba(128, 128, 128, 0.561);
+}
+
+.dropdown-multiselect__caret {
+    display: none !important;
+}
+
+.dropdown-list {
+    position: absolute;
+    padding-top: 5px !important;
+    width: 100%;
+    z-index: 9999;
+    border: 0.1px solid rgba(128, 128, 128, 0.561) !important;
+    border-radius: 0px !important;
+    background: #fff !important;
+    margin-top: 5px !important;
+    box-shadow: 0 1px 5px #95959549 !important;
+}

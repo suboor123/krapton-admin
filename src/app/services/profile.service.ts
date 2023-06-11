@@ -5,6 +5,7 @@ import { BehaviorSubject, from, Observable } from 'rxjs';
 import { Department } from '../types/department';
 import { Position } from '../types/position';
 import { User } from '../types/user';
+import { FirebaseDataSerializer } from '../lib/firebase-serializer';
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +17,11 @@ export class ProfileService {
         null as any
     );
     public currentUserObserver$ = this.currentUserSubject.asObservable();
+
+    public allUsersSubject: BehaviorSubject<User[]> = new BehaviorSubject(
+        [] as User[]
+    );
+    public allUserObserver$ = this.allUsersSubject.asObservable();
 
     constructor(private fb: AngularFireDatabase) {}
 
@@ -37,6 +43,17 @@ export class ProfileService {
         return from(this.fb.database.ref(`${this.path}/${uid}`).get());
     }
 
+    public refreshAllUsers() {
+        this.syncAll().subscribe((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+                const payload = snapshot.val();
+                const users = new FirebaseDataSerializer<User>(
+                    payload
+                ).serialize();
+                this.allUsersSubject.next(users);
+            }
+        });
+    }
     public syncAll(): Observable<DataSnapshot> {
         return from(this.fb.database.ref(`${this.path}`).get());
     }

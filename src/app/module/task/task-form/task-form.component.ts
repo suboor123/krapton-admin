@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { FirebaseDataSerializer } from 'src/app/lib/firebase-serializer';
 import { Spinner } from 'src/app/lib/spinner';
 import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/types/user';
@@ -38,20 +39,21 @@ export class TaskFormComponent implements OnInit {
         this.profile.syncAll().subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const payload = snapshot.val();
-                this.users = Object.keys(payload).map((key) => {
-                    return {
-                        id: key,
-                        ...payload[key],
-                    };
-                });
-                this.assigneeDropdown = this.users.map((user) => {
-                    return {
-                        item_id: user.id!,
-                        item_text: `${user.firstName} ${user.lastName}`,
-                    };
-                });
+                this.users = new FirebaseDataSerializer<User>(
+                    payload
+                ).serialize();
+                this.populateDropdownOptions();
                 Spinner.hide();
             }
+        });
+    }
+
+    private populateDropdownOptions(): void {
+        this.assigneeDropdown = this.users.map((user) => {
+            return {
+                item_id: user.id!,
+                item_text: `${user.firstName} ${user.lastName}`,
+            };
         });
     }
 
