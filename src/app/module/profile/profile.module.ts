@@ -2,27 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { Routes, RouterModule } from '@angular/router';
 import { MultiSelectComponent } from '../../shared/multi-select/multi-select.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
-
-const routes: Routes = [
-    {
-        path: '',
-        component: UserProfileComponent,
-    },
-    {
-        path: 'edit-profile',
-        component: EditProfileComponent,
-    },
-];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-})
-class ProfileRouteModule {}
+import { ProfileRouteModule } from './profile-routing.module';
 
 @NgModule({
     declarations: [
@@ -32,9 +15,9 @@ class ProfileRouteModule {}
     ],
     imports: [
         CommonModule,
-        ProfileRouteModule,
         NgMultiSelectDropDownModule.forRoot(),
         FormsModule,
+        ProfileRouteModule,
     ],
 })
 export class ProfileModule {}

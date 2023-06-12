@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FirebaseDataSerializer } from 'src/app/lib/firebase-serializer';
 import { Spinner } from 'src/app/lib/spinner';
@@ -11,6 +11,8 @@ import { User } from 'src/app/types/user';
     styleUrls: ['./task-form.component.css'],
 })
 export class TaskFormComponent implements OnInit {
+    @Input() closeTaskModal: () => void = () => {};
+
     public users: User[] = [];
     public assigneeDropdown: { item_id: string; item_text: string }[] = [];
     dropdownSettings: IDropdownSettings = {};

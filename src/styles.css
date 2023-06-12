@@ -34,9 +34,11 @@ a {
     z-index: 99;
 }
 
-.dropdown-btn {
+.dropdown-btn,
+input[type='text'],
+input[type='number'] {
     border-radius: 0px !important;
-    border: 0.1px solid rgba(128, 128, 128, 0.561);
+    border: 1px solid rgba(0, 0, 0, 0.03) !important;
 }
 
 .dropdown-multiselect__caret {

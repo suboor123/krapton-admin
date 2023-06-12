@@ -71,6 +71,7 @@ export class ProfileService {
             }
         );
     }
+
     public syncAll(): Observable<DataSnapshot> {
         return from(this.fb.database.ref(`${this.path}`).get());
     }

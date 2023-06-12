@@ -3,6 +3,7 @@ import { INDIAN_CITIES, INDIAN_STATES } from 'src/app/constants/cities';
 import { Skills } from 'src/app/constants/skills';
 import { AuthService } from 'src/app/services/auth.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { StrUtils } from 'src/app/utils/str';
 
 type Tabs = 'BasicInfo' | 'TechnicalInfo' | 'Documents' | 'Finish';
 
@@ -16,6 +17,7 @@ export class EditProfileComponent implements OnInit {
     public activeTab: Tabs = 'BasicInfo';
     public dropdownList: any = [];
     public selectedItems: any = [];
+    public formErrors: string[] = [];
     public dropdownSettings: IDropdownSettings = {};
     public allTabs: Tabs[] = [
         'BasicInfo',
@@ -33,7 +35,7 @@ export class EditProfileComponent implements OnInit {
             state: '',
         },
         skillInfo: {
-            experiance: '',
+            experience: '',
             skills: '',
             aboutMe: '',
         },
@@ -45,29 +47,53 @@ export class EditProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.dropdownList = this.SkillsValue;
-        this.skilldropdown();
+        this.initMultiSelect();
+    }
+
+    private initMultiSelect() {
+        this.dropdownSettings = {
+            singleSelection: false,
+            idField: 'item_id',
+            textField: 'item_text',
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            itemsShowLimit: 5,
+            allowSearchFilter: true,
+        };
     }
 
     public handleSelectState(state: any) {
         this.formValues.basicInfo.state = state;
     }
 
+    public validateFormVals(formObj: { [key: string]: string | number }) {
+        let isValidated = true,
+            errors: string[] = [];
+        Object.keys(formObj).forEach((key) => {
+            if (formObj[key] === '') {
+                isValidated = false;
+                if (!errors.length)
+                    errors.push(
+                        `${StrUtils.capitalizeFirstLetter(
+                            key
+                        )} is a required field.`
+                    );
+            }
+        });
+        this.formErrors = errors;
+        return isValidated;
+    }
+
     public openNextTab(activeTab: string) {
         if (
             activeTab === 'BasicInfo' &&
-            this.formValues.basicInfo.firstName !== '' &&
-            this.formValues.basicInfo.lastName !== '' &&
-            this.formValues.basicInfo.phoneNumber !== '' &&
-            this.formValues.basicInfo.gender !== '' &&
-            this.formValues.basicInfo.state !== ''
+            this.validateFormVals(this.formValues.basicInfo)
         ) {
             this.nextTab();
         }
         if (
             activeTab === 'TechnicalInfo' &&
-            this.formValues.skillInfo.aboutMe !== '' &&
-            this.formValues.skillInfo.experiance !== '' &&
-            this.formValues.skillInfo.skills !== ''
+            this.validateFormVals(this.formValues.skillInfo)
         ) {
             this.nextTab();
         }
@@ -100,17 +126,5 @@ export class EditProfileComponent implements OnInit {
     }
     onAllSkillSelect() {
         this.formValues.skillInfo.skills = this.selectedItems;
-    }
-
-    skilldropdown() {
-        this.dropdownSettings = {
-            singleSelection: false,
-            idField: 'item_id',
-            textField: 'item_text',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
-            itemsShowLimit: 5,
-            allowSearchFilter: true,
-        };
     }
 }
