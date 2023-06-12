@@ -1,7 +1,7 @@
-type UnserializedData<T> = { [key: string]: T };
+type DeserializedData<T> = { [key: string]: T };
 
 export class FirebaseDataSerializer<T> {
-    constructor(private data: UnserializedData<T>) {}
+    constructor(private data: DeserializedData<T>) {}
 
     serialize(): T[] {
         return Object.keys(this.data).map((key) => {

@@ -24,22 +24,17 @@ export class TaskService {
     public taskObservable$ = this.tasksSubject.asObservable();
 
     public async create(task: Task, callback: Callback): Promise<any> {
-        this.profile.getCurrentUser().subscribe((snapshot) => {
-            if (snapshot && snapshot.exists()) {
-                const user = snapshot.val() as User;
-                this.fb.database.ref(`${this.path}`).push(
-                    {
-                        ...task,
-                        status: TaskStatus.OPENED,
-                        createdBy: {
-                            userId: snapshot.key,
-                            userName: `${user.firstName} ${user.lastName}`,
-                        },
-                    } as Partial<Task>,
-                    callback
-                );
-            }
-        });
+        const userId = JSON.parse(localStorage.getItem('user')!).uid;
+        this.fb.database.ref(`${this.path}`).push(
+            {
+                ...task,
+                status: TaskStatus.OPENED,
+                createdBy: {
+                    userId: userId,
+                },
+            } as Partial<Task>,
+            callback
+        );
     }
 
     public syncById(id: string): Observable<DataSnapshot> {
@@ -50,10 +45,10 @@ export class TaskService {
         from(this.fb.database.ref(`${this.path}`).get()).subscribe(
             (snapshot) => {
                 if (snapshot && snapshot.exists()) {
-                    const tasks = new FirebaseDataSerializer(
+                    const tasks = new FirebaseDataSerializer<Task>(
                         snapshot.val()
                     ).serialize();
-                    this.tasksSubject.next(tasks as Task[]);
+                    this.tasksSubject.next(tasks);
                     if (callback) callback();
                 }
             }
