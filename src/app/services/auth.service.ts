@@ -57,8 +57,18 @@ export class AuthService {
         this.firebaseAuth
             .signInWithPopup(new (firebase as any).auth.GoogleAuthProvider())
             .then((res) => {
-                const { uid, email } = res.user!;
-                localStorage.setItem('user', JSON.stringify({ uid, email }));
+                const { uid, email, displayName, photoURL, phoneNumber } =
+                    res.user!;
+                localStorage.setItem(
+                    'user',
+                    JSON.stringify({
+                        uid,
+                        email,
+                        displayName,
+                        photoURL,
+                        phoneNumber,
+                    })
+                );
                 this.redirectUserAfterLogin(uid);
             })
             .catch((err) => {

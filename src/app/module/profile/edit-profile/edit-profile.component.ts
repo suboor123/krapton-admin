@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { INDIAN_CITIES, INDIAN_STATES } from 'src/app/constants/cities';
+import { INDIAN_STATES } from 'src/app/constants/cities';
 import { Skills } from 'src/app/constants/skills';
 import { AuthService } from 'src/app/services/auth.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -7,6 +7,7 @@ import { StrUtils } from 'src/app/utils/str';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Gender, User } from 'src/app/types/user';
 import { Alert } from 'src/app/lib/alert';
+import { Router } from '@angular/router';
 
 type Tabs = 'BasicInfo' | 'TechnicalInfo' | 'Documents' | 'Finish';
 
@@ -48,12 +49,28 @@ export class EditProfileComponent implements OnInit {
 
     constructor(
         public auth: AuthService,
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
         this.dropdownList = this.SkillsValue;
         this.initMultiSelect();
+        this.populateFieldsWithGoogle();
+    }
+
+    private populateFieldsWithGoogle() {
+        const u = localStorage.getItem('user');
+        if (u) {
+            const user = JSON.parse(u);
+            const [firstName, lastName] = (user?.displayName || '').split(' ');
+            this.formValues.basicInfo = {
+                ...this.formValues.basicInfo,
+                firstName: firstName || '',
+                lastName: lastName || '',
+                phoneNumber: user.phoneNumber || '',
+            };
+        }
     }
 
     private initMultiSelect() {
@@ -93,19 +110,20 @@ export class EditProfileComponent implements OnInit {
     public openNextTab(activeTab: string) {
         if (
             activeTab === 'BasicInfo' &&
-            !this.validateFormVals(this.formValues.basicInfo)
-        )
-            return;
-        this.switchToNextTab();
-
+            this.validateFormVals(this.formValues.basicInfo)
+        ) {
+            this.switchToNextTab();
+        }
         if (
             activeTab === 'TechnicalInfo' &&
-            !this.validateFormVals(this.formValues.skillInfo as any)
-        )
-            return;
-        this.switchToNextTab();
+            this.validateFormVals(this.formValues.skillInfo as any)
+        ) {
+            this.switchToNextTab();
+        }
 
-        if (activeTab === 'Documents') this.switchToNextTab();
+        if (activeTab === 'Documents') {
+            this.switchToNextTab();
+        }
     }
 
     switchToNextTab(): void {
@@ -148,12 +166,9 @@ export class EditProfileComponent implements OnInit {
     }
 
     public handleSubmit() {
-        this.profileService
-            .createUser(this.serializedFormVals as User)
-            .then((snapshot) => {
-                if (snapshot) {
-                    Alert.success('Profile updated successfully!');
-                }
-            });
+        this.profileService.createUser(this.serializedFormVals as User, () => {
+            Alert.success('Profile updated successfully!');
+            this.router.navigate(['/profile']);
+        });
     }
 }

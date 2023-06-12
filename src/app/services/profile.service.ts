@@ -7,6 +7,8 @@ import { Position } from '../types/position';
 import { User } from '../types/user';
 import { FirebaseDataSerializer } from '../lib/firebase-serializer';
 import { Alert } from '../lib/alert';
+import { UserRole } from '../types/role';
+import { Callback } from '../types/callback';
 
 @Injectable({
     providedIn: 'root',
@@ -26,13 +28,19 @@ export class ProfileService {
 
     constructor(private fb: AngularFireDatabase) {}
 
-    public async createUser(user: User): Promise<User> {
-        const userId = JSON.parse(localStorage.getItem('user')!).uid;
-        return this.fb.database.ref(`${this.path}/${userId}`).set({
-            ...user,
-            position: Position.Unassigned,
-            department: Department.Unassigned,
-        });
+    public async createUser(user: User, callback?: Callback): Promise<User> {
+        const u = JSON.parse(localStorage.getItem('user')!);
+        return this.fb.database.ref(`${this.path}/${u.uid}`).set(
+            {
+                ...user,
+                imageUrl: u.photoURL || '',
+                email: u.email,
+                role: UserRole.USER,
+                position: Position.Unassigned,
+                department: Department.Unassigned,
+            },
+            callback
+        );
     }
 
     public refreshCurrentUser() {
