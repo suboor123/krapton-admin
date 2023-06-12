@@ -11,7 +11,7 @@ import { debounce } from 'src/app/utils/debounce';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    public disbaledSbtmBtn = true;
+    public disbaledSbtmBtn = false;
 
     public authCredentials: AuthCredentials = {
         email: 'admin@gmail.com',

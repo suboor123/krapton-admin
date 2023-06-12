@@ -3,6 +3,11 @@ import { Position } from './position';
 import { UserRole } from './role';
 
 export type Gender = 'male' | 'female' | 'other';
+export type UserReference = {
+    userId: string;
+    userName: string;
+    imageUrl?: string;
+};
 
 export interface User {
     id?: string;

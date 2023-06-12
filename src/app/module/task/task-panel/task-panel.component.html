@@ -1,0 +1,13 @@
+<div class="card m-b-30">
+    <div class="card-header">
+        <h5 class="card-title mb-0">{{ heading }}</h5>
+    </div>
+    <div class="card-body">
+        <div id="kanban-board-one">
+            <div *ngFor="let task of taskList">
+                <app-task-card [task]="task"></app-task-card>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary-rgba btn-block btn-lg font-16"><i class="feather icon-plus mr-2"></i>Add Task</button>
+    </div>
+</div>

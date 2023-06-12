@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Alert } from 'src/app/lib/alert';
 import { FirebaseDataSerializer } from 'src/app/lib/firebase-serializer';
 import { Spinner } from 'src/app/lib/spinner';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/app/types/task';
 import { User } from 'src/app/types/user';
+import { StrUtils } from 'src/app/utils/str';
 
 @Component({
     selector: 'app-task-form',
@@ -14,16 +18,17 @@ export class TaskFormComponent implements OnInit {
     @Input() closeTaskModal: () => void = () => {};
 
     public users: User[] = [];
+    public formErrors: string[] = [];
     public assigneeDropdown: { item_id: string; item_text: string }[] = [];
     dropdownSettings: IDropdownSettings = {};
 
     public taskForm = {
         title: '',
         description: '',
-        assignedTo: '',
+        assignedTo: undefined as any,
     };
 
-    constructor(private profile: ProfileService) {}
+    constructor(private profile: ProfileService, private task: TaskService) {}
 
     ngOnInit(): void {
         this.fetchUsers();
@@ -55,15 +60,63 @@ export class TaskFormComponent implements OnInit {
             return {
                 item_id: user.id!,
                 item_text: `${user.firstName} ${user.lastName}`,
+                imageUrl: user.imageUrl,
             };
         });
     }
 
-    public handleSelectAssignee(assigneeId: any) {
-        console.log(assigneeId);
+    public handleSelectAssignee(assignee: any) {
+        this.taskForm.assignedTo = {
+            assigneeId: assignee.item_id,
+            assigneeName: assignee.item_text,
+            ...(assignee.imageUrl ? { imageUrl: assignee.imageUrl } : {}),
+        };
     }
 
     public handleContentChange(content: string) {
-        console.log(content);
+        this.taskForm.description = content;
+    }
+
+    private validateForm() {
+        let isValidated = true,
+            errors: string[] = [];
+        Object.keys(this.taskForm).forEach((key) => {
+            if (
+                typeof (this.taskForm as any)[key] === 'string' &&
+                (this.taskForm as any)[key] === ''
+            ) {
+                isValidated = false;
+                if (!errors.length)
+                    errors.push(
+                        `${StrUtils.capitalizeFirstLetter(
+                            key
+                        )} is a required field.`
+                    );
+            }
+        });
+
+        this.formErrors = errors;
+        return isValidated;
+    }
+
+    private get serializedData(): Partial<Task> {
+        return {
+            title: this.taskForm.title,
+            description: this.taskForm.description,
+            ...(this.taskForm.assignedTo
+                ? { assignedTo: this.taskForm.assignedTo }
+                : {}),
+        };
+    }
+
+    public handleSubmit() {
+        if (this.validateForm()) {
+            Spinner.show();
+            this.task.create(this.serializedData as Task, () => {
+                Spinner.hide();
+                Alert.success('Task created successfully!');
+                this.closeTaskModal();
+            });
+        }
     }
 }

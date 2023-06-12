@@ -8,6 +8,7 @@ import { TaskBoardRouteModule } from './task-board-router.module';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
+import { TaskPanelComponent } from './task-panel/task-panel.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
         CardComponent,
         BoardHeaderComponent,
         TaskFormComponent,
+        TaskPanelComponent,
     ],
     imports: [
         SharedModule,

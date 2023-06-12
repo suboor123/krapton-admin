@@ -40,10 +40,6 @@ const routes: Routes = [
         path: 'tasks',
         loadChildren: () =>
             import('./module/task/task.module').then((m) => m.TaskModule),
-        resolve: {
-            profileResolver: ProfileResolver,
-            taskResolver: TaskResolver,
-        },
     },
 ];
 

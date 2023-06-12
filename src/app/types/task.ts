@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User, UserReference } from './user';
 
 type UserId = 'string';
 
@@ -14,13 +14,12 @@ export interface Task {
     title: string;
     description: string;
     createdAt: string;
-    createdBy: UserId;
-    assignedTo: UserId;
+    createdBy: UserReference;
     status: TaskStatus;
     startDate: string;
     expectedEndDate: string;
     pullRequestUrl: string;
     isArchived: boolean;
-    assignedUser?: User;
+    assignedTo?: UserReference;
     createdByUser?: User;
 }

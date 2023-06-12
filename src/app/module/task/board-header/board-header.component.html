@@ -19,6 +19,6 @@
 
 <div *ngIf="showCreateTaskModal">
     <app-modal size="lg" heading="Create Task" [handleClose]="closeTaskModal.bind(this)">
-        <app-task-form [handleClose]="closeTaskModal.bind(this)"></app-task-form>
+        <app-task-form [closeTaskModal]="closeTaskModal.bind(this)"></app-task-form>
     </app-modal>
 </div>

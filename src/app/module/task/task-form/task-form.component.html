@@ -1,17 +1,22 @@
 <form>
-    <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Title <span class="text-danger">*</span></label>
-        <div class="col-sm-12">
-            <input type="text" class="form-control" />
+    <div class="alert-list">
+        <div class="alert alert-danger" role="alert" *ngFor="let err of formErrors">
+            {{ err }}
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row mb-1">
+        <label class="col-sm-4 col-form-label">Title <span class="text-danger">*</span></label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control" [(ngModel)]="taskForm.title" [ngModelOptions]="{ standalone: true }" />
+        </div>
+    </div>
+    <div class="form-group row mb-1">
         <label class="col-sm-4 col-form-label">Description <span class="text-danger">*</span></label>
         <div class="col-sm-12">
             <app-editor [onChange]="handleContentChange.bind(this)"></app-editor>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row mb-1">
         <label class="col-sm-4 col-form-label">Assignee</label>
         <div class="col-sm-12">
             <ng-multiselect-dropdown
@@ -25,7 +30,7 @@
     </div>
 </form>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Create</button>
+<div class="modal-footer border-0 border-none">
+    <button type="button" class="btn btn-secondary" (click)="closeTaskModal()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="handleSubmit()">Create</button>
 </div>
