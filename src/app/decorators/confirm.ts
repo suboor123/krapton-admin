@@ -1,14 +1,7 @@
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
-export function Confirmable(
-    heading: string = 'Are you sure?',
-    description: string = 'Do you want to perform this action?'
-) {
-    return (
-        target: Object,
-        propertyKey: string,
-        descriptor: PropertyDescriptor
-    ) => {
+export function Confirmable(heading: string = 'Are you sure?', description: string = 'Do you want to perform this action?') {
+    return (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
         // Again, cache the original method for later use
         const originalMethod = descriptor.value;
         // the configuration object for sweetalert
