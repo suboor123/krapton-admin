@@ -67,8 +67,8 @@ export class TaskFormComponent implements OnInit {
 
     public handleSelectAssignee(assignee: any) {
         this.taskForm.assignedTo = {
-            assigneeId: assignee.item_id,
-            assigneeName: assignee.item_text,
+            userId: assignee.item_id,
+            userName: assignee.item_text,
             ...(assignee.imageUrl ? { imageUrl: assignee.imageUrl } : {}),
         };
     }
@@ -116,6 +116,7 @@ export class TaskFormComponent implements OnInit {
                 Spinner.hide();
                 Alert.success('Task created successfully!');
                 this.closeTaskModal();
+                this.task.refreshAllTasks();
             });
         }
     }

@@ -41,6 +41,28 @@ export class TaskService {
         return from(this.fb.database.ref(`${this.path}/${id}`).get());
     }
 
+    private attachUsers(tasks: Task[]) {
+        this.profile.syncAll().subscribe((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+                const payload = snapshot.val();
+                const users = new FirebaseDataSerializer<User>(
+                    payload
+                ).serialize();
+                tasks.forEach((task) => {
+                    const assignedUser = users.find(
+                        (u) => u.id === task.assignedTo?.userId
+                    );
+                    const creator = users.find(
+                        (u) => u.id === task.createdBy.userId
+                    );
+                    task.assignedUser = assignedUser;
+                    task.createdByUser = creator;
+                });
+            }
+        });
+        return tasks;
+    }
+
     public refreshAllTasks(callback?: Callback) {
         from(this.fb.database.ref(`${this.path}`).get()).subscribe(
             (snapshot) => {
@@ -48,7 +70,7 @@ export class TaskService {
                     const tasks = new FirebaseDataSerializer<Task>(
                         snapshot.val()
                     ).serialize();
-                    this.tasksSubject.next(tasks);
+                    this.tasksSubject.next(this.attachUsers(tasks));
                     if (callback) callback();
                 }
             }

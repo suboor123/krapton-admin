@@ -22,4 +22,5 @@ export interface Task {
     isArchived: boolean;
     assignedTo?: UserReference;
     createdByUser?: User;
+    assignedUser?: User;
 }
