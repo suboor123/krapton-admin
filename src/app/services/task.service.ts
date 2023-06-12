@@ -13,15 +13,13 @@ import { FirebaseDataSerializer } from '../lib/firebase-serializer';
 })
 export class TaskService {
     private path: string = 'tasks';
-    constructor(
-        private fb: AngularFireDatabase,
-        private profile: ProfileService
-    ) {}
+    constructor(private fb: AngularFireDatabase, private profile: ProfileService) {}
 
-    public tasksSubject: BehaviorSubject<Task[]> = new BehaviorSubject(
-        [] as Task[]
-    );
+    public tasksSubject: BehaviorSubject<Task[]> = new BehaviorSubject([] as Task[]);
     public taskObservable$ = this.tasksSubject.asObservable();
+
+    public selectedTaskSubject: BehaviorSubject<Task> = new BehaviorSubject(null as any);
+    public selectedTaskObservable$ = this.selectedTaskSubject.asObservable();
 
     public async create(task: Task, callback: Callback): Promise<any> {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
@@ -45,16 +43,10 @@ export class TaskService {
         this.profile.syncAll().subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const payload = snapshot.val();
-                const users = new FirebaseDataSerializer<User>(
-                    payload
-                ).serialize();
+                const users = new FirebaseDataSerializer<User>(payload).serialize();
                 tasks.forEach((task) => {
-                    const assignedUser = users.find(
-                        (u) => u.id === task.assignedTo?.userId
-                    );
-                    const creator = users.find(
-                        (u) => u.id === task.createdBy.userId
-                    );
+                    const assignedUser = users.find((u) => u.id === task.assignedTo?.userId);
+                    const creator = users.find((u) => u.id === task.createdBy.userId);
                     task.assignedUser = assignedUser;
                     task.createdByUser = creator;
                 });
@@ -64,16 +56,16 @@ export class TaskService {
     }
 
     public refreshAllTasks(callback?: Callback) {
-        from(this.fb.database.ref(`${this.path}`).get()).subscribe(
-            (snapshot) => {
-                if (snapshot && snapshot.exists()) {
-                    const tasks = new FirebaseDataSerializer<Task>(
-                        snapshot.val()
-                    ).serialize();
-                    this.tasksSubject.next(this.attachUsers(tasks));
-                    if (callback) callback();
-                }
+        from(this.fb.database.ref(`${this.path}`).get()).subscribe((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+                const tasks = new FirebaseDataSerializer<Task>(snapshot.val()).serialize();
+                this.tasksSubject.next(this.attachUsers(tasks));
+                if (callback) callback();
             }
-        );
+        });
+    }
+
+    public select(task: Task) {
+        this.selectedTaskSubject.next(task);
     }
 }

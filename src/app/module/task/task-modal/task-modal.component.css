@@ -1,0 +1,10 @@
+.task-modal {
+    max-width: 80%;
+}
+
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 90%;
+        margin: 1.75rem auto;
+    }
+}

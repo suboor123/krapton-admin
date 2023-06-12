@@ -5,9 +5,13 @@
     <div class="card-body">
         <div id="kanban-board-one">
             <div *ngFor="let task of taskList">
-                <app-task-card [task]="task"></app-task-card>
+                <app-task-card [openTaskModal]="openTaskModal.bind(this)" [task]="task"></app-task-card>
             </div>
         </div>
         <button type="button" class="btn btn-primary-rgba btn-block btn-lg font-16"><i class="feather icon-plus mr-2"></i>Add Task</button>
     </div>
+</div>
+
+<div *ngIf="showTaskModal">
+    <app-task-modal [handleClose]="closeTaskModal.bind(this)"></app-task-modal>
 </div>

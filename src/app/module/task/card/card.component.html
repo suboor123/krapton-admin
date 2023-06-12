@@ -1,5 +1,5 @@
-<div class="card border m-b-20" *ngIf="task">
-    <div class="card-body">
+<div class="card border m-b-20" (click)="handleSelectTask()" *ngIf="task">
+    <div class="card-body cursor-pointer">
         <div class="row align-items-center">
             <div class="col-8">
                 <div class="kanban-tag">
