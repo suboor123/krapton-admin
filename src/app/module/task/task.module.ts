@@ -12,21 +12,8 @@ import { TaskPanelComponent } from './task-panel/task-panel.component';
 import { TaskModalComponent } from './task-modal/task-modal.component';
 
 @NgModule({
-    declarations: [
-        BoardComponent,
-        CardComponent,
-        BoardHeaderComponent,
-        TaskFormComponent,
-        TaskPanelComponent,
-        TaskModalComponent,
-    ],
-    imports: [
-        SharedModule,
-        CommonModule,
-        TaskBoardRouteModule,
-        NgMultiSelectDropDownModule.forRoot(),
-        FormsModule,
-    ],
+    declarations: [BoardComponent, CardComponent, BoardHeaderComponent, TaskFormComponent, TaskPanelComponent, TaskModalComponent],
+    imports: [SharedModule, CommonModule, TaskBoardRouteModule, NgMultiSelectDropDownModule.forRoot(), FormsModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TaskModule {}
