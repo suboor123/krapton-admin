@@ -9,12 +9,12 @@ export interface User {
     email: string;
     firstName: string;
     lastName: string;
-    phoneNumber: number;
+    phoneNumber: string;
     location?: string;
     gender: Gender;
     imageUrl?: string;
     aboutMe?: string;
-    experience: number;
+    experience: string;
     department: Department;
     role: UserRole;
     position: Position;

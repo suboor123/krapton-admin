@@ -262,7 +262,7 @@
 
                                     <li aria-hidden="true">
                                         <span *ngIf="activeTab === 'Finish'">
-                                            <a role="menuitem">Finish</a>
+                                            <a (click)="handleSubmit()" role="menuitem">Finish</a>
                                         </span>
                                     </li>
                                 </ul>

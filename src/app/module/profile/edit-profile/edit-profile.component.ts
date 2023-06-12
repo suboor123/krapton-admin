@@ -4,6 +4,9 @@ import { Skills } from 'src/app/constants/skills';
 import { AuthService } from 'src/app/services/auth.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { StrUtils } from 'src/app/utils/str';
+import { ProfileService } from 'src/app/services/profile.service';
+import { Gender, User } from 'src/app/types/user';
+import { Alert } from 'src/app/lib/alert';
 
 type Tabs = 'BasicInfo' | 'TechnicalInfo' | 'Documents' | 'Finish';
 
@@ -36,14 +39,17 @@ export class EditProfileComponent implements OnInit {
         },
         skillInfo: {
             experience: '',
-            skills: '',
+            skills: [],
             aboutMe: '',
         },
     };
     public finalValue = {};
     public SkillsValue: string[] = Skills;
 
-    constructor(public auth: AuthService) {}
+    constructor(
+        public auth: AuthService,
+        private profileService: ProfileService
+    ) {}
 
     ngOnInit(): void {
         this.dropdownList = this.SkillsValue;
@@ -70,7 +76,7 @@ export class EditProfileComponent implements OnInit {
         let isValidated = true,
             errors: string[] = [];
         Object.keys(formObj).forEach((key) => {
-            if (formObj[key] === '') {
+            if (typeof formObj[key] === 'string' && formObj[key] === '') {
                 isValidated = false;
                 if (!errors.length)
                     errors.push(
@@ -87,23 +93,22 @@ export class EditProfileComponent implements OnInit {
     public openNextTab(activeTab: string) {
         if (
             activeTab === 'BasicInfo' &&
-            this.validateFormVals(this.formValues.basicInfo)
-        ) {
-            this.nextTab();
-        }
+            !this.validateFormVals(this.formValues.basicInfo)
+        )
+            return;
+        this.switchToNextTab();
+
         if (
             activeTab === 'TechnicalInfo' &&
-            this.validateFormVals(this.formValues.skillInfo)
-        ) {
-            this.nextTab();
-        }
+            !this.validateFormVals(this.formValues.skillInfo as any)
+        )
+            return;
+        this.switchToNextTab();
 
-        if (activeTab === 'Documents') {
-            this.nextTab();
-        }
+        if (activeTab === 'Documents') this.switchToNextTab();
     }
 
-    nextTab(): void {
+    switchToNextTab(): void {
         const indexOfCurrentTab = this.allTabs.indexOf(this.activeTab);
         if (indexOfCurrentTab !== this.allTabs.length - 1) {
             this.activeTab = this.allTabs[indexOfCurrentTab + 1];
@@ -126,5 +131,29 @@ export class EditProfileComponent implements OnInit {
     }
     onAllSkillSelect() {
         this.formValues.skillInfo.skills = this.selectedItems;
+    }
+
+    private get serializedFormVals(): Partial<User> {
+        const formVal = this.formValues;
+        return {
+            firstName: formVal.basicInfo.firstName,
+            lastName: formVal.basicInfo.lastName,
+            phoneNumber: formVal.basicInfo.phoneNumber,
+            location: formVal.basicInfo.state,
+            gender: formVal.basicInfo.gender as Gender,
+            aboutMe: formVal.skillInfo.aboutMe,
+            experience: formVal.skillInfo.experience,
+            skills: formVal.skillInfo.skills,
+        };
+    }
+
+    public handleSubmit() {
+        this.profileService
+            .createUser(this.serializedFormVals as User)
+            .then((snapshot) => {
+                if (snapshot) {
+                    Alert.success('Profile updated successfully!');
+                }
+            });
     }
 }
