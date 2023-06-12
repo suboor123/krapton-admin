@@ -16,14 +16,10 @@ import { Callback } from '../types/callback';
 export class ProfileService {
     private path: string = 'users';
 
-    public currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(
-        null as any
-    );
+    public currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(null as any);
     public currentUserObserver$ = this.currentUserSubject.asObservable();
 
-    public allUsersSubject: BehaviorSubject<User[]> = new BehaviorSubject(
-        [] as User[]
-    );
+    public allUsersSubject: BehaviorSubject<User[]> = new BehaviorSubject([] as User[]);
     public allUserObserver$ = this.allUsersSubject.asObservable();
 
     constructor(private fb: AngularFireDatabase) {}
@@ -66,9 +62,7 @@ export class ProfileService {
             (snapshot) => {
                 if (snapshot && snapshot.exists()) {
                     const payload = snapshot.val();
-                    const users = new FirebaseDataSerializer<User>(
-                        payload
-                    ).serialize();
+                    const users = new FirebaseDataSerializer<User>(payload).serialize();
                     this.allUsersSubject.next(users);
                 }
             },
