@@ -1,0 +1,32 @@
+<div class="card m-b-30">
+    <div class="card-body">
+        <div class="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <a
+                            class="btn btn-link"
+                            type="button"
+                            data-toggle="collapse"
+                            href="#collapse{{ cardId }}"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                            >{{ announcement.title }}</a
+                        >
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="media" id="collapse{{ cardId }}" class="collapse show" aria-labelledby="headingOne">
+                        <img class="mr-3 rounded-circle" src="assets/images/users/boy.svg" alt="Generic placeholder image" />
+                        <div class="media-body">
+                            <h5 class="mt-0 font-16">
+                                {{ announcement.createdByUser!.firstName }} {{ announcement.createdByUser!.lastName }}
+                            </h5>
+                            <div [innerHtml]="announcement.content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

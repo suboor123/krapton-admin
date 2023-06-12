@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardResolver } from './resolvers/dashboard.resolver';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { TaskResolver } from './resolvers/task.resolver';
+import { AnnouncementResolver } from './resolvers/announcement.resolver';
 
 const routes: Routes = [
     {
@@ -40,6 +41,13 @@ const routes: Routes = [
         path: 'tasks',
         loadChildren: () =>
             import('./module/task/task.module').then((m) => m.TaskModule),
+    },
+    {
+        path: 'announcements',
+        loadChildren: () =>
+            import('./module/announcement/announcement.module').then(
+                (m) => m.AnnouncementModule
+            ),
     },
 ];
 

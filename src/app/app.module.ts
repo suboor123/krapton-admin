@@ -13,6 +13,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ProfileModule } from './module/profile/profile.module';
 import { FormsModule } from '@angular/forms';
 import { LazyImageDirective } from './directives/lazy-image.directive';
+import { AnnouncementModule } from './module/announcement/announcement.module';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
         AppRoutingModule,
         AuthModule,
         ProfileModule,
+        AnnouncementModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
