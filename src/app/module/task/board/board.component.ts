@@ -26,18 +26,22 @@ export class BoardComponent implements OnInit {
         [TaskStatus.COMPLETED]: [],
     };
 
-    private taskSubscription: Subscription | undefined;
+    public taskSubscription: Subscription | undefined;
     constructor(private taskService: TaskService) {}
+
+    private resetTaskMap() {
+        this.tasksMap = {
+            [TaskStatus.OPENED]: [],
+            [TaskStatus.IN_PROGESS]: [],
+            [TaskStatus.IN_REVIEW]: [],
+            [TaskStatus.COMPLETED]: [],
+        };
+    }
 
     ngOnInit(): void {
         this.taskService.refreshAllTasks();
         this.taskSubscription = this.taskService.taskObservable$.subscribe((tasks) => {
-            this.tasksMap = {
-                [TaskStatus.OPENED]: [],
-                [TaskStatus.IN_PROGESS]: [],
-                [TaskStatus.IN_REVIEW]: [],
-                [TaskStatus.COMPLETED]: [],
-            };
+            this.resetTaskMap();
             tasks.forEach((task) => {
                 this.tasksMap[task.status].push(task);
             });
