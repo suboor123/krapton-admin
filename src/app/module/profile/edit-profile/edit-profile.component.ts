@@ -23,12 +23,7 @@ export class EditProfileComponent implements OnInit {
     public selectedItems: any = [];
     public formErrors: string[] = [];
     public dropdownSettings: IDropdownSettings = {};
-    public allTabs: Tabs[] = [
-        'BasicInfo',
-        'TechnicalInfo',
-        'Documents',
-        'Finish',
-    ];
+    public allTabs: Tabs[] = ['BasicInfo', 'TechnicalInfo', 'Documents', 'Finish'];
 
     public formValues = {
         basicInfo: {
@@ -47,11 +42,7 @@ export class EditProfileComponent implements OnInit {
     public finalValue = {};
     public SkillsValue: string[] = Skills;
 
-    constructor(
-        public auth: AuthService,
-        private profileService: ProfileService,
-        private router: Router
-    ) {}
+    constructor(public auth: AuthService, private profileService: ProfileService, private router: Router) {}
 
     ngOnInit(): void {
         this.dropdownList = this.SkillsValue;
@@ -82,6 +73,7 @@ export class EditProfileComponent implements OnInit {
             unSelectAllText: 'UnSelect All',
             itemsShowLimit: 5,
             allowSearchFilter: true,
+            enableCheckAll: false,
         };
     }
 
@@ -95,12 +87,7 @@ export class EditProfileComponent implements OnInit {
         Object.keys(formObj).forEach((key) => {
             if (typeof formObj[key] === 'string' && formObj[key] === '') {
                 isValidated = false;
-                if (!errors.length)
-                    errors.push(
-                        `${StrUtils.capitalizeFirstLetter(
-                            key
-                        )} is a required field.`
-                    );
+                if (!errors.length) errors.push(`${StrUtils.capitalizeFirstLetter(key)} is a required field.`);
             }
         });
         this.formErrors = errors;
@@ -108,16 +95,10 @@ export class EditProfileComponent implements OnInit {
     }
 
     public openNextTab(activeTab: string) {
-        if (
-            activeTab === 'BasicInfo' &&
-            this.validateFormVals(this.formValues.basicInfo)
-        ) {
+        if (activeTab === 'BasicInfo' && this.validateFormVals(this.formValues.basicInfo)) {
             this.switchToNextTab();
         }
-        if (
-            activeTab === 'TechnicalInfo' &&
-            this.validateFormVals(this.formValues.skillInfo as any)
-        ) {
+        if (activeTab === 'TechnicalInfo' && this.validateFormVals(this.formValues.skillInfo as any)) {
             this.switchToNextTab();
         }
 
