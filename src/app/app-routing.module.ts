@@ -4,7 +4,7 @@ import { DashboardResolver } from './resolvers/dashboard.resolver';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { TaskResolver } from './resolvers/task.resolver';
 import { AnnouncementResolver } from './resolvers/announcement.resolver';
-import { AuthGaurdGuard } from './services/auth-gaurd.guard';
+import { AuthGaurdGuard } from './guards/auth-gaurd.guard';
 
 const routes: Routes = [
     {
