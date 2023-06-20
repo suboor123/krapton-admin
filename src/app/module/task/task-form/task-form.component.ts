@@ -46,9 +46,7 @@ export class TaskFormComponent implements OnInit {
         this.profile.syncAll().subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const payload = snapshot.val();
-                this.users = new FirebaseDataSerializer<User>(
-                    payload
-                ).serialize();
+                this.users = new FirebaseDataSerializer<User>(payload).serialize();
                 this.populateDropdownOptions();
                 Spinner.hide();
             }
@@ -81,17 +79,9 @@ export class TaskFormComponent implements OnInit {
         let isValidated = true,
             errors: string[] = [];
         Object.keys(this.taskForm).forEach((key) => {
-            if (
-                typeof (this.taskForm as any)[key] === 'string' &&
-                (this.taskForm as any)[key] === ''
-            ) {
+            if (typeof (this.taskForm as any)[key] === 'string' && (this.taskForm as any)[key] === '') {
                 isValidated = false;
-                if (!errors.length)
-                    errors.push(
-                        `${StrUtils.capitalizeFirstLetter(
-                            key
-                        )} is a required field.`
-                    );
+                if (!errors.length) errors.push(`${StrUtils.capitalizeFirstLetter(key)} is a required field.`);
             }
         });
 
@@ -103,9 +93,7 @@ export class TaskFormComponent implements OnInit {
         return {
             title: this.taskForm.title,
             description: this.taskForm.description,
-            ...(this.taskForm.assignedTo
-                ? { assignedTo: this.taskForm.assignedTo }
-                : {}),
+            ...(this.taskForm.assignedTo ? { assignedTo: this.taskForm.assignedTo } : {}),
         };
     }
 

@@ -11,11 +11,7 @@ import { Spinner } from '../lib/spinner';
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(
-        private firebaseAuth: AngularFireAuth,
-        private router: Router,
-        private profile: ProfileService
-    ) {}
+    constructor(private firebaseAuth: AngularFireAuth, private router: Router, private profile: ProfileService) {}
 
     async signUp(credentials: AuthCredentials): Promise<void> {
         const { email, password } = credentials;
@@ -57,8 +53,7 @@ export class AuthService {
         this.firebaseAuth
             .signInWithPopup(new (firebase as any).auth.GoogleAuthProvider())
             .then((res) => {
-                const { uid, email, displayName, photoURL, phoneNumber } =
-                    res.user!;
+                const { uid, email, displayName, photoURL, phoneNumber } = res.user!;
                 localStorage.setItem(
                     'user',
                     JSON.stringify({

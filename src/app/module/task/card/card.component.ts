@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/types/task';
 
 @Component({
@@ -8,7 +9,12 @@ import { Task } from 'src/app/types/task';
 })
 export class CardComponent implements OnInit {
     @Input() task: Task | undefined;
-    constructor() {}
-
+    @Input() openTaskModal: () => void = () => {};
+    constructor(private taskService: TaskService) {}
     ngOnInit(): void {}
+
+    handleSelectTask() {
+        this.taskService.select(this.task as Task);
+        this.openTaskModal();
+    }
 }

@@ -56,3 +56,13 @@ input[type='number'] {
     margin-top: 5px !important;
     box-shadow: 0 1px 5px #95959549 !important;
 }
+
+.swal2-loader button,
+.swal2-modal .swal2-confirm,
+.swal2-modal .swal2-styled {
+    padding: 10px 30px !important;
+    font-size: inherit !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}

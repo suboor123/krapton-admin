@@ -6107,6 +6107,4 @@ export const INDIAN_STATES_AND_CITIES = [
 ];
 
 export const INDIAN_CITIES = INDIAN_STATES_AND_CITIES.map((obj) => obj.name);
-export const INDIAN_STATES = [
-    ...new Set(INDIAN_STATES_AND_CITIES.map((obj) => obj.state)),
-];
+export const INDIAN_STATES = [...new Set(INDIAN_STATES_AND_CITIES.map((obj) => obj.state))];

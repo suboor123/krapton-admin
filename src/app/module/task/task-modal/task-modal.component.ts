@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-task-modal',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./task-modal.component.css'],
 })
 export class TaskModalComponent implements OnInit {
+    @Input() handleClose: (() => void) | undefined;
     constructor() {}
 
     ngOnInit(): void {}

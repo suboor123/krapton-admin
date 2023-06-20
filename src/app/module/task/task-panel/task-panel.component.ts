@@ -10,7 +10,17 @@ export class TaskPanelComponent implements OnInit {
     @Input() heading: string = 'Task List';
     @Input() taskList: Task[] = [];
 
+    public showTaskModal: boolean = false;
+
     constructor() {}
 
     ngOnInit(): void {}
+
+    public openTaskModal() {
+        this.showTaskModal = true;
+    }
+
+    public closeTaskModal() {
+        this.showTaskModal = false;
+    }
 }
