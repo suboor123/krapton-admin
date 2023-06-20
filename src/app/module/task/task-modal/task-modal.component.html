@@ -2,13 +2,111 @@
     <div class="modal-dialog zoomIn animated modal-lg task-modal" role="document">
         <div class="modal-content">
             <div class="modal-header bg-white border-none border-0">
-                <h5 class="modal-title text-dark" id="exampleModalLongTitle-1">{{ 'heading' }}</h5>
+                <h5 class="modal-title text-dark task-title hvr-cont p-3" id="exampleModalLongTitle-1">{{ selectedTask?.title }}</h5>
                 <button (click)="handleClose!()" type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <ng-content></ng-content>
+                <div class="row">
+                    <div class="col-md-9 ox">
+                        <app-modal-content [selectedTask]="selectedTask"></app-modal-content>
+                    </div>
+                    <div class="col-md-3 ox">
+                        <div class="accordion accordion-outline" id="accordionoutline">
+                            <div class="card">
+                                <div class="card-header" id="headingOneoutline">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse">
+                                            <i class="feather icon-award mr-2"></i>First title goes here
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">First</th>
+                                                        <th scope="col">Last</th>
+                                                        <th scope="col">Handle</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>Larry</td>
+                                                        <td>the Bird</td>
+                                                        <td>@twitter</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingOneoutline">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse">
+                                            <i class="feather icon-award mr-2"></i>First title goes here
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">First</th>
+                                                        <th scope="col">Last</th>
+                                                        <th scope="col">Handle</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>Larry</td>
+                                                        <td>the Bird</td>
+                                                        <td>@twitter</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

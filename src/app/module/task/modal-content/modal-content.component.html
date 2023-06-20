@@ -1,0 +1,12 @@
+<div class="task-description hvr-cont p-3">
+    <h4>Description</h4>
+    <div *ngIf="!isEditable" [innerHTML]="taskDescription" (click)="onContentClick()" id="modal-cont"></div>
+
+    <div *ngIf="isEditable">
+        <app-editor [htmlContent]="taskDescription"></app-editor>
+        <div class="float-right">
+            <button class="btn btn-lg btn-light mt-3 mr-2">Cancel</button>
+            <button class="btn btn-lg btn-primary mt-3" (click)="handleSave()">Save</button>
+        </div>
+    </div>
+</div>
