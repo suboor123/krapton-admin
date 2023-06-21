@@ -10,4 +10,5 @@ export interface Announcement {
     imageUrl?: string;
     taggedUsers?: User[];
     createdByUser?: User;
+    id?: string;
 }

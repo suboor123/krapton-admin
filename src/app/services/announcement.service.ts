@@ -4,9 +4,7 @@ import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Announcement } from '../types/announcement';
 import { Callback } from '../types/callback';
 import { FirebaseDataSerializer } from '../lib/firebase-serializer';
-import { Task } from '../types/task';
 import { User } from '../types/user';
-import { DataSnapshot, DatabaseSnapshot } from '@angular/fire/database/interfaces';
 import { ProfileService } from './profile.service';
 
 @Injectable({
@@ -26,7 +24,7 @@ export class AnnouncementService {
                 createdBy: {
                     userId: userId,
                 },
-                createdAt: new Date().toString(),
+                createdAt: new Date().toDateString(),
             } as Partial<Announcement>,
             callback
         );
@@ -51,10 +49,10 @@ export class AnnouncementService {
                     };
                     announcement.taggedUsers = taggedUser;
                     announcement.createdByUser = creator;
-                    console.log(creator);
                 });
             }
         });
+        console.log(announcements);
         return announcements;
     }
 
@@ -62,9 +60,29 @@ export class AnnouncementService {
         from(this.fb.database.ref(`${this.path}`).get()).subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const announcements = new FirebaseDataSerializer<Announcement>(snapshot.val()).serialize();
+                console.log(announcements);
                 this.announcementsSubject.next(this.attachUsers(announcements));
                 if (callback) callback();
             }
         });
     }
+
+    public delete(id: string, callback?: Callback) {
+        this.fb.database.ref(`${this.path}`).child(`${id}`).remove();
+        if (callback) callback();
+    }
+
+    public updateLikes(id: string, likes: String[]) {
+        const userId = JSON.parse(localStorage.getItem('user')!).uid;
+        let isUserLiked = likes.includes(userId);
+        if (isUserLiked) {
+            likes.splice(likes.indexOf(userId), 1);
+        } else {
+            likes.push(userId);
+        }
+        this.fb.database.ref(`${this.path}`).child(`${id}`).update({
+            likes: likes,
+        });
+    }
+    public update(id: string, data: Partial<Announcement>) {}
 }

@@ -8,6 +8,9 @@ import { debounce } from 'src/app/utils/debounce';
     styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
+    @Input() htmlContent: string | undefined = '';
+    @Input() onChange: (content: string) => void = () => {};
+
     editorConfig: AngularEditorConfig | any = {
         editable: true,
         spellcheck: true,
@@ -21,36 +24,20 @@ export class EditorComponent implements OnInit {
         showToolbar: true,
         placeholder: 'Enter text here...',
         defaultParagraphSeparator: '',
-        defaultFontName: '',
-        defaultFontSize: '',
+        defaultFontName: 'Muli',
         fonts: [
             { class: 'arial', name: 'Arial' },
             { class: 'times-new-roman', name: 'Times New Roman' },
             { class: 'calibri', name: 'Calibri' },
             { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+            { class: 'editable-txt', name: 'Muli' },
         ],
-        customClasses: [
-            {
-                name: 'quote',
-                class: 'quote',
-            },
-            {
-                name: 'redText',
-                class: 'redText',
-            },
-            {
-                name: 'titleText',
-                class: 'titleText',
-                tag: 'h1',
-            },
-        ],
+        customClasses: [],
         uploadWithCredentials: false,
         sanitize: true,
         toolbarPosition: 'top',
-        toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
+        toolbarHiddenButtons: [],
     };
-
-    @Input() onChange: (content: string) => void = () => {};
 
     constructor() {}
 

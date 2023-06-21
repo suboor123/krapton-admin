@@ -1,5 +1,5 @@
-<div class="card m-b-30">
-    <div class="card-body">
+<div class="card m-b-30" *ngIf="announcement">
+    <div class="card-body" style="padding-bottom: 0px">
         <div class="accordion">
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -11,19 +11,42 @@
                             href="#collapse{{ cardId }}"
                             aria-expanded="true"
                             aria-controls="collapseOne"
-                            >{{ announcement.title }}</a
-                        >
+                            >{{ announcement.title }}
+                            <span style="float: right; color: red; font-size: 15px" (click)="deleteAnnouncement(announcement.id)"
+                                ><i class="fa fa-trash"></i></span
+                        ></a>
                     </h2>
                 </div>
                 <div class="card-body">
                     <div class="media" id="collapse{{ cardId }}" class="collapse show" aria-labelledby="headingOne">
-                        <img class="mr-3 rounded-circle" src="assets/images/users/boy.svg" alt="Generic placeholder image" />
+                        <div class="profileBox">
+                            <img class="mr-3 rounded-circle float-left" src="assets/images/users/boy.svg" alt="Generic placeholder image" />
+                            <div class="nameBox">
+                                <h5 class="mt-0 mb-1 font-16">
+                                    {{ announcement.createdByUser!.firstName }} {{ announcement.createdByUser!.lastName }}
+                                </h5>
+                                <h5 class="mt-0 font-12">{{ announcement.createdAt }}</h5>
+                            </div>
+                        </div>
+
                         <div class="media-body">
-                            <h5 class="mt-0 font-16">
-                                {{ announcement.createdByUser!.firstName }} {{ announcement.createdByUser!.lastName }}
-                            </h5>
                             <div [innerHtml]="announcement.content"></div>
                         </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="padding-left: 0px">
+                    <i class="fa fa-heart-o" *ngIf="!isUserLiked(announcement.likes)" (click)="onLike(announcement.id)"></i>
+                    <i
+                        class="fa fa-heart"
+                        *ngIf="announcement.likes && isUserLiked(announcement.likes)"
+                        (click)="onLike(announcement.id)"
+                    ></i>
+                    <span class="likesCount" *ngIf="announcement.likes">{{ announcement.likes.length }}</span>
+                    <i class="fa fa-send-o share"></i>
+                    <div class="float-right">
+                        <h5 class="font-12" style="display: inline; color: #0080ff" *ngFor="let tagged of announcement.tagTo">
+                            #{{ tagged.userName }}
+                        </h5>
                     </div>
                 </div>
             </div>
