@@ -52,7 +52,6 @@ export class AnnouncementService {
                 });
             }
         });
-        console.log(announcements);
         return announcements;
     }
 
@@ -60,7 +59,6 @@ export class AnnouncementService {
         from(this.fb.database.ref(`${this.path}`).get()).subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const announcements = new FirebaseDataSerializer<Announcement>(snapshot.val()).serialize();
-                console.log(announcements);
                 this.announcementsSubject.next(this.attachUsers(announcements));
                 if (callback) callback();
             }

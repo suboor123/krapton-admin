@@ -12,7 +12,9 @@
                             aria-expanded="true"
                             aria-controls="collapseOne"
                             >{{ announcement.title }}
-                            <span style="float: right; color: red; font-size: 15px" (click)="deleteAnnouncement(announcement.id)"
+                            <span
+                                style="float: right; color: red; font-size: 15px"
+                                (click)="$event.stopPropagation(); deleteAnnouncement(announcement.id); (false)"
                                 ><i class="fa fa-trash"></i></span
                         ></a>
                     </h2>
@@ -42,11 +44,9 @@
                         (click)="onLike(announcement.id)"
                     ></i>
                     <span class="likesCount" *ngIf="announcement.likes">{{ announcement.likes.length }}</span>
-                    <i class="fa fa-send-o share"></i>
+                    <!-- <i class="fa fa-send-o share"></i> -->
                     <div class="float-right">
-                        <h5 class="font-12" style="display: inline; color: #0080ff" *ngFor="let tagged of announcement.tagTo">
-                            #{{ tagged.userName }}
-                        </h5>
+                        <span class="badge font-13 ml-1" *ngFor="let tagged of announcement.tagTo"> #{{ tagged.userName }} </span>
                     </div>
                 </div>
             </div>

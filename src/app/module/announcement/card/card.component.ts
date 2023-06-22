@@ -10,20 +10,18 @@ import { Announcement } from 'src/app/types/announcement';
 export class CardComponent implements OnInit {
     @Input() announcement!: Announcement;
     @Input() cardId!: Number;
-    @Input() deleteAnnouncement: (id: any) => void = () => {};
+    @Input() deleteAnnouncement: (id: string | undefined) => void = () => {};
     constructor(private announcementService: AnnouncementService) {}
 
-    ngOnInit(): void {
-        console.log(this.announcement);
-    }
+    ngOnInit(): void {}
 
     public isUserLiked(likesArray: string[]) {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
         return this.announcement.likes && this.announcement.likes.includes(userId);
     }
 
-    public onLike(id: any) {
+    public onLike(id: string | undefined) {
         let likes = this.announcement.likes ? this.announcement.likes : (this.announcement.likes = []);
-        this.announcementService.updateLikes(id, likes);
+        this.announcementService.updateLikes(id as string, likes);
     }
 }

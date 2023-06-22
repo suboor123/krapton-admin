@@ -33,8 +33,8 @@ export class PanelComponent implements OnInit {
         this.showAnnouncementModal = false;
     }
     @Confirmable('Are you sure?', 'You want to delete this announcement')
-    public deleteAnnouncement(id: any) {
-        this.announcement.delete(id, () => {
+    public deleteAnnouncement(id: string | undefined) {
+        this.announcement.delete(id as string, () => {
             Alert.success('Announcement deleted');
             this.announcement.refreshAllAnnouncement();
         });

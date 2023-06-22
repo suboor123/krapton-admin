@@ -54,3 +54,9 @@
     transition: 0.3s;
     color: #0080ff;
 }
+
+.badge {
+    display: inline;
+    color: white;
+    background-color: #0080ff;
+}
