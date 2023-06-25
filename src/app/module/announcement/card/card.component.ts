@@ -11,17 +11,21 @@ export class CardComponent implements OnInit {
     @Input() announcement!: Announcement;
     @Input() cardId!: Number;
     @Input() deleteAnnouncement: (id: string | undefined) => void = () => {};
+    public userId: string = '';
     constructor(private announcementService: AnnouncementService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.userId = JSON.parse(localStorage.getItem('user')!).uid;
+    }
 
     public isUserLiked(likesArray: string[]) {
-        const userId = JSON.parse(localStorage.getItem('user')!).uid;
-        return this.announcement.likes && this.announcement.likes.includes(userId);
+        return this.announcement.likes && this.announcement.likes.includes(this.userId);
     }
 
     public onLike(id: string | undefined) {
         let likes = this.announcement.likes ? this.announcement.likes : (this.announcement.likes = []);
         this.announcementService.toogleLikes(id as string, likes);
     }
+
+    public editAnnouncement(id: string | undefined) {}
 }

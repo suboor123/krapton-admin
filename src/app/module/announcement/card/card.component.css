@@ -60,3 +60,13 @@
     color: white;
     background-color: #0080ff;
 }
+
+.iconBox {
+    float: right;
+    padding: 2px;
+}
+
+.iconBox span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
