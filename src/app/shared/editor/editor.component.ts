@@ -16,7 +16,7 @@ export class EditorComponent implements OnInit {
         spellcheck: true,
         height: 'auto',
         minHeight: '200px',
-        maxHeight: 'auto',
+        maxHeight: '350px',
         width: 'auto',
         minWidth: '0',
         translate: 'yes',
