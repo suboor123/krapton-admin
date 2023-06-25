@@ -66,21 +66,18 @@ export class AnnouncementService {
     }
 
     public delete(id: string, callback?: Callback) {
-        this.fb.database.ref(`${this.path}`).child(`${id}`).remove();
-        if (callback) callback();
+        this.fb.database.ref(`${this.path}`).child(`${id}`).remove(callback);
     }
 
-    public updateLikes(id: string, likes: String[]) {
+    public toogleLikes(id: string, likes: String[]) {
         const userId = JSON.parse(localStorage.getItem('user')!).uid;
-        let isUserLiked = likes.includes(userId);
-        if (isUserLiked) {
-            likes.splice(likes.indexOf(userId), 1);
-        } else {
-            likes.push(userId);
-        }
+        const isUserLiked = likes.includes(userId);
+        if (isUserLiked) likes.splice(likes.indexOf(userId), 1);
+        else likes.push(userId);
         this.fb.database.ref(`${this.path}`).child(`${id}`).update({
             likes: likes,
         });
     }
+
     public update(id: string, data: Partial<Announcement>) {}
 }

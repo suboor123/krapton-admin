@@ -22,6 +22,6 @@ export class CardComponent implements OnInit {
 
     public onLike(id: string | undefined) {
         let likes = this.announcement.likes ? this.announcement.likes : (this.announcement.likes = []);
-        this.announcementService.updateLikes(id as string, likes);
+        this.announcementService.toogleLikes(id as string, likes);
     }
 }
