@@ -1,1 +1,1 @@
-export type Callback = () => void;
+export type Callback = (withArgs?: any) => void;
