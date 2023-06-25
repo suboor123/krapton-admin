@@ -7,7 +7,7 @@
         {
             "files": "src/**/*.html",
             "options": {
-                "printWidth": 140
+                "printWidth": 160
             }
         },
         {

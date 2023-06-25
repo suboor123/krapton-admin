@@ -4,9 +4,7 @@ import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Announcement } from '../types/announcement';
 import { Callback } from '../types/callback';
 import { FirebaseDataSerializer } from '../lib/firebase-serializer';
-import { Task } from '../types/task';
 import { User } from '../types/user';
-import { DataSnapshot, DatabaseSnapshot } from '@angular/fire/database/interfaces';
 import { ProfileService } from './profile.service';
 
 @Injectable({
@@ -26,7 +24,7 @@ export class AnnouncementService {
                 createdBy: {
                     userId: userId,
                 },
-                createdAt: new Date().toString(),
+                createdAt: new Date().toDateString(),
             } as Partial<Announcement>,
             callback
         );
@@ -51,7 +49,6 @@ export class AnnouncementService {
                     };
                     announcement.taggedUsers = taggedUser;
                     announcement.createdByUser = creator;
-                    console.log(creator);
                 });
             }
         });
@@ -67,4 +64,20 @@ export class AnnouncementService {
             }
         });
     }
+
+    public delete(id: string, callback?: Callback) {
+        this.fb.database.ref(`${this.path}`).child(`${id}`).remove(callback);
+    }
+
+    public toogleLikes(id: string, likes: String[]) {
+        const userId = JSON.parse(localStorage.getItem('user')!).uid;
+        const isUserLiked = likes.includes(userId);
+        if (isUserLiked) likes.splice(likes.indexOf(userId), 1);
+        else likes.push(userId);
+        this.fb.database.ref(`${this.path}`).child(`${id}`).update({
+            likes: likes,
+        });
+    }
+
+    public update(id: string, data: Partial<Announcement>) {}
 }

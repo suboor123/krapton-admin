@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
     @Input() heading: string = 'Modal Heading';
     @Input() size: string = 'md';
     @Input() handleClose: () => void = () => {
@@ -14,5 +14,11 @@ export class ModalComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        document.body.style.overflow = 'hidden';
+    }
+
+    ngOnDestroy(): void {
+        document.body.style.overflow = 'auto';
+    }
 }

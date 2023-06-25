@@ -13,7 +13,7 @@
 
 <div class="row mt-5">
     <div class="col-lg-12" *ngFor="let announcement of announcements; let i = index">
-        <app-card [announcement]="announcement" [cardId]="i + 1"></app-card>
+        <app-card [announcement]="announcement" [deleteAnnouncement]="deleteAnnouncement.bind(this)" [cardId]="i + 1"></app-card>
     </div>
 </div>
 

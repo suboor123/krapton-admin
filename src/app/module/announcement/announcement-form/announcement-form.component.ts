@@ -27,10 +27,7 @@ export class AnnouncementFormComponent implements OnInit {
         tagTo: this.tag,
     };
 
-    constructor(
-        private profile: ProfileService,
-        private announcement: AnnouncementService
-    ) {}
+    constructor(private profile: ProfileService, private announcement: AnnouncementService) {}
 
     ngOnInit(): void {
         this.fetchUsers();
@@ -48,9 +45,7 @@ export class AnnouncementFormComponent implements OnInit {
         this.profile.syncAll().subscribe((snapshot) => {
             if (snapshot && snapshot.exists()) {
                 const payload = snapshot.val();
-                this.users = new FirebaseDataSerializer<User>(
-                    payload
-                ).serialize();
+                this.users = new FirebaseDataSerializer<User>(payload).serialize();
                 this.populateDropdownOptions();
                 Spinner.hide();
             }
@@ -94,17 +89,9 @@ export class AnnouncementFormComponent implements OnInit {
         let isValidated = true,
             errors: string[] = [];
         Object.keys(this.announcementForm).forEach((key) => {
-            if (
-                typeof (this.announcementForm as any)[key] === 'string' &&
-                (this.announcementForm as any)[key] === ''
-            ) {
+            if (typeof (this.announcementForm as any)[key] === 'string' && (this.announcementForm as any)[key] === '') {
                 isValidated = false;
-                if (!errors.length)
-                    errors.push(
-                        `${StrUtils.capitalizeFirstLetter(
-                            key
-                        )} is a required field.`
-                    );
+                if (!errors.length) errors.push(`${StrUtils.capitalizeFirstLetter(key)} is a required field.`);
             }
         });
 
@@ -116,24 +103,20 @@ export class AnnouncementFormComponent implements OnInit {
         return {
             title: this.announcementForm.title,
             content: this.announcementForm.content,
-            ...(this.announcementForm.tagTo
-                ? { tagTo: this.announcementForm.tagTo }
-                : {}),
+            likes: [],
+            ...(this.announcementForm.tagTo ? { tagTo: this.announcementForm.tagTo } : {}),
         };
     }
 
     public handleSubmit() {
         if (this.validateForm()) {
             Spinner.show();
-            this.announcement.create(
-                this.serializedData as Announcement,
-                () => {
-                    Spinner.hide();
-                    Alert.success('Task created successfully!');
-                    this.closeAnnouncementModal();
-                    this.announcement.refreshAllAnnouncement();
-                }
-            );
+            this.announcement.create(this.serializedData as Announcement, () => {
+                Spinner.hide();
+                Alert.success('Task created successfully!');
+                this.closeAnnouncementModal();
+                this.announcement.refreshAllAnnouncement();
+            });
         }
     }
 }
